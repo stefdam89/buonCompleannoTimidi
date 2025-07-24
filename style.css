@@ -272,11 +272,17 @@ footer p {
 
 /* Media Queries per la Responsività */
 @media (max-width: 900px) {
-    .hero h1 {
-        font-size: 3.5em;
+    .navbar .nav-links li {
+    margin: 5px 10px; /* Riduci ulteriormente lo spazio tra le voci del menu per schermi stretti */
+    }
+    .hero-small .hero-content {
+        padding-top: 100px; /* Aggiungi un padding superiore per lasciare spazio alla navbar */
+    }
+    .hero h1 { /* Riduci ulteriormente la dimensione del titolo per schermi intermedi */
+        font-size: 2.8em; /* Ridotto da 3.5em per maggiore spazio */
     }
     .hero .subtitle {
-        font-size: 1.8em;
+        font-size: 1.6em; /* Ridotto da 1.8em */
     }
     .countdown {
         font-size: 2.8em;
@@ -304,11 +310,14 @@ footer p {
 }
 
 @media (max-width: 600px) {
+    .hero-small .hero-content {
+        padding-top: 80px; /* Riduci il padding su schermi molto piccoli se necessario */
+    }
     .hero h1 {
-        font-size: 2.2em;
+        font-size: 1.8em; /* Ulteriore riduzione per schermi molto piccoli */
     }
     .hero .subtitle {
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
     .countdown {
         font-size: 2.2em;
