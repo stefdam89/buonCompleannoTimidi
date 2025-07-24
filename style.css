@@ -1,0 +1,332 @@
+/* Importazione Font da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Variabili CSS per colori e font - NUOVA PALETTE FLUORESCENTE / RAVE */
+:root {
+    --primary-color: #00FFFF; /* Ciano brillante (Aqua/Electric Blue) */
+    --secondary-color: #FF00FF; /* Magenta elettrico (Fuchsia) */
+    --accent-color: #FFFF00; /* Giallo fluo (Neon Yellow) - per accenti minori */
+    --section-solid-bg: rgba(0, 0, 0, 0.9); /* MODIFICATO: Leggermente più trasparente */
+    --hero-overlay-opacity: 0.5; /* Opacità per l'overlay dell'hero */
+    --card-bg-transparent-light: rgba(255, 255, 255, 0.005); /* MODIFICATO: Estremamente trasparente */
+    --text-on-dark: #FFFFFF; /* Testo bianco puro su sfondi scuri */
+    --heading-on-dark: var(--secondary-color); /* Titoli Magenta su sfondi scuri */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --border-radius: 8px; /* Bordo arrotondato solo per le card interne */
+    --shadow: 0 8px 25px rgba(0, 255, 255, 0.4); /* Ombra con colore fluo per le card */
+}
+
+/* Reset CSS di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body - Sfondo fisso globale per l'effetto parallax */
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-on-dark);
+    background: url('BG_festa_timidi.png') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
+}
+
+/* Il container limita la larghezza del CONTENUTO all'interno delle sezioni */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header / Hero Section - La prima banda a tutta larghezza (trasparente) */
+.hero {
+    color: var(--text-on-dark);
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
+}
+
+.hero::before { /* Overlay scuro per l'header (la banda scura trasparente) */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, var(--hero-overlay-opacity));
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 5em;
+    margin-bottom: 60px; /* Esempio: aumentato a 30px */
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+}
+
+.hero .subtitle {
+    font-size: 2.5em;
+    margin-bottom: 200px;
+    color: var(--secondary-color);
+    text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Countdown */
+.countdown {
+    font-family: var(--font-heading);
+    font-size: 3.5em;
+    color: var(--accent-color);
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    font-weight: 700;
+}
+
+/* Bottoni */
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #000;
+    padding: 16px 35px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: all 0.4s ease;
+    font-weight: bold;
+    font-family: var(--font-heading);
+    border: 2px solid var(--primary-color);
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    color: #000;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px var(--secondary-color), 0 0 40px var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-large {
+    font-size: 1.6em;
+    padding: 20px 40px;
+}
+
+.btn-small {
+    font-size: 1em;
+    padding: 12px 25px;
+}
+
+/* Sezioni Generali - Bande a tutta larghezza con sfondo quasi solido */
+.section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: var(--section-solid-bg); /* MODIFICATO: Sfondo leggermente più trasparente */
+    color: var(--text-on-dark);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.section h2 {
+    font-family: var(--font-heading);
+    font-size: 3.2em;
+    margin-bottom: 40px;
+    color: var(--heading-on-dark);
+    position: relative;
+    padding-bottom: 15px;
+    text-shadow: 0 0 10px var(--heading-on-dark);
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 100px;
+    height: 5px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.section p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-on-dark);
+}
+
+/* Griglie per Programma e Cosa Portare - Card interne con sfondo molto trasparente */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 50px;
+    margin-top: 40px;
+    text-align: left;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid-3-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+    text-align: left;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.program-item, .item-list {
+    background-color: var(--card-bg-transparent-light); /* MODIFICATO: Sfondo delle card: estremamente trasparente */
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-on-dark);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.program-item:hover, .item-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
+    border-color: rgba(255, 0, 255, 0.4);
+}
+
+.program-item h3, .item-list h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.9em;
+    border-bottom: 2px solid rgba(var(--primary-color), 0.3);
+    padding-bottom: 10px;
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+.program-item ul, .item-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.program-item ul li, .item-list ul li {
+    margin-bottom: 12px;
+    font-size: 1.15em;
+    line-height: 1.6;
+    color: var(--text-on-dark);
+}
+
+.program-item ul li::before, .item-list ul li::before {
+    content: '⚡ ';
+    color: var(--accent-color);
+    margin-right: 8px;
+    font-size: 1.3em;
+}
+
+/* Allineamento testo specifico */
+.text-center {
+    text-align: center;
+}
+
+/* Footer - Quasi solido con bordi fluo */
+footer {
+    background-color: rgba(0, 0, 0, 0.95);
+    color: var(--text-on-dark);
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1em;
+    border-top: 5px solid var(--secondary-color);
+    margin-top: 40px;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+/* Media Queries per la Responsività */
+@media (max-width: 900px) {
+    .hero h1 {
+        font-size: 3.5em;
+    }
+    .hero .subtitle {
+        font-size: 1.8em;
+    }
+    .countdown {
+        font-size: 2.8em;
+    }
+    .section {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .section h2 {
+        font-size: 2.8em;
+    }
+    .section p {
+        font-size: 1.1em;
+    }
+    .grid-2-cols, .grid-3-cols {
+        grid-template-columns: 1fr;
+        max-width: none;
+        margin-left: 20px;
+        margin-right: 20px;
+        gap: 30px;
+    }
+    .program-item, .item-list {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.2em;
+    }
+    .hero .subtitle {
+        font-size: 1.5em;
+    }
+    .countdown {
+        font-size: 2.2em;
+    }
+    .section {
+        padding: 40px 0;
+    }
+    .section h2 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    .btn-large {
+        font-size: 1.2em;
+        padding: 15px 30px;
+    }
+    .program-item h3, .item-list h3 {
+        font-size: 1.6em;
+    }
+}
