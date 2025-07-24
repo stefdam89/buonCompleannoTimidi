@@ -29,7 +29,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    background: url('BG_festa_timidi.png') no-repeat center center fixed;
+    background: url('BG_festa_timidi.png') no-repeat center center fixed; /* Immagine di sfondo aggiornata */
     background-size: cover;
     overflow-x: hidden;
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
@@ -328,5 +328,128 @@ footer p {
     }
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
+    }
+}
+
+/* Stili per la Navbar - NUOVI */
+.navbar {
+    background-color: var(--section-solid-bg); /* Sfondo come le sezioni */
+    color: var(--text-on-dark);
+    padding: 15px 0;
+    position: sticky; /* Rende la navbar fissa in alto quando si scorre */
+    top: 0;
+    z-index: 1000; /* Assicura che la navbar sia sopra gli altri elementi */
+    border-bottom: 2px solid var(--primary-color); /* Bordo neon sotto */
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3); /* Ombra neon */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-family: var(--font-heading);
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.navbar .logo a {
+    color: var(--primary-color); /* Colore neon per il logo */
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--primary-color);
+    transition: text-shadow 0.3s ease;
+}
+
+.navbar .logo a:hover {
+    text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color); /* Bagliore diverso all'hover */
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin-left: 30px; /* Spazio tra le voci del menu */
+}
+
+.navbar .nav-links a {
+    color: var(--text-on-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar .nav-links a::after { /* Sottolineatura animata */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    color: var(--secondary-color); /* Cambia colore all'hover */
+    text-shadow: 0 0 8px var(--secondary-color);
+}
+
+.navbar .nav-links a:hover::after {
+    width: 100%; /* La sottolineatura appare all'hover */
+}
+
+/* Media Queries per la Navbar (per renderla responsive su schermi piccoli) */
+@media (max-width: 900px) {
+    .navbar .container {
+        flex-direction: column; /* Impila logo e menu su schermi piccoli */
+        text-align: center;
+    }
+
+    .navbar .logo {
+        margin-bottom: 10px;
+    }
+
+    .navbar .nav-links {
+        flex-wrap: wrap; /* Avvolge le voci su più righe se non c'è spazio */
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .navbar .nav-links li {
+        margin: 5px 15px; /* Spazio ridotto per mobile */
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar .logo {
+        font-size: 1.8em;
+    }
+
+    .navbar .nav-links a {
+        font-size: 0.95em;
+    }
+}
+
+/* Stile per Header di pagine interne (più corto) */
+.hero-small {
+    height: 40vh; /* O un valore in pixel, es. 300px */
+}
+
+/* Media Query per header piccoli su mobile */
+@media (max-width: 900px) {
+    .hero-small {
+        height: 30vh; /* Ancora più corto su schermi piccoli */
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-small {
+        height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
     }
 }
