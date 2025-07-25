@@ -216,16 +216,27 @@ body.no-scroll {
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Aggiunto background-color e border-color alla transizione per l'animazione allo scroll */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     color: var(--text-on-dark);
-    border: 1px solid rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.2); /* Bordo azzurrino di default */
 }
 
-.program-item:hover, .item-list:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
-    border-color: rgba(255, 0, 255, 0.4);
+/* NUOVA CLASSE per l'effetto "quando in viewport" (Viola) */
+.program-item.in-view, .item-list.in-view {
+    background-color: rgba(255, 0, 255, 0.05); /* Sfondo leggermente viola trasparente */
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5); /* Ombra viola */
+    border-color: rgba(255, 0, 255, 0.4); /* Bordo viola */
+    transform: translateY(-5px); /* Mantieni l'effetto di sollevamento se ti piace */
 }
+
+/* Modifica dell'hover per mantenere un'interazione, ma diversa dall'in-view */
+.program-item:hover, .item-list:hover {
+    transform: translateY(-5px) scale(1.01); /* Un leggero ingrandimento al passaggio del mouse */
+    box-shadow: 0 10px 35px rgba(0, 255, 255, 0.6); /* Ombra azzurra più intensa */
+    border-color: rgba(0, 255, 255, 0.6); /* Bordo azzurro più intenso */
+}
+
 
 .program-item h3, .item-list h3 {
     font-family: var(--font-heading);
@@ -283,8 +294,7 @@ footer p {
 /* Stile per Header di pagine interne (più corto) */
 .hero-small {
     height: 40vh; /* Altezza di default per desktop/tablet */
-    /* Rimuovi completamente justify-content per evitare conflitti */
-    justify-content: center; /* Torniamo al default di centratura */
+    justify-content: center; /* Centra verticalmente il contenuto */
 }
 
 /* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
@@ -299,7 +309,7 @@ footer p {
 
 
 /* ---------------------------------------------------------------------- */
-/* NAVBAR E HAMBURGER MENU */
+/* NAVBAR E HAMBURGER MENU - UNIFICATO */
 /* ---------------------------------------------------------------------- */
 
 .navbar {
@@ -338,19 +348,19 @@ footer p {
     text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
 }
 
-/* Link desktop (visibili solo su desktop) */
-.nav-desktop-links {
+/* Link di navigazione generale (desktop default) */
+.nav-links { /* Questa è la classe unificata */
     list-style: none;
-    display: flex;
+    display: flex; /* Rende i link orizzontali su desktop */
     margin: 0;
     padding: 0;
 }
 
-.nav-desktop-links li {
+.nav-links li {
     margin-left: 30px;
 }
 
-.nav-desktop-links a {
+.nav-links a {
     color: var(--text-on-dark);
     text-decoration: none;
     font-weight: 600;
@@ -359,7 +369,7 @@ footer p {
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.nav-desktop-links a::after {
+.nav-links a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -370,31 +380,18 @@ footer p {
     transition: width 0.3s ease;
 }
 
-.nav-desktop-links a:hover {
+.nav-links a:hover {
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color);
 }
 
-.nav-desktop-links a:hover::after {
+.nav-links a:hover::after {
     width: 100%;
-}
-
-/* Menu mobile (nascosto di default, gestito da JS nelle media query) */
-.nav-mobile-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none; /* Nascondi SEMPRE su desktop. Verrà mostrato con flex solo in media query */
-}
-
-/* Titoli e separatori nel menu mobile (nascosti su desktop) */
-.menu-section-title, .menu-separator {
-    display: none;
 }
 
 /* Hamburger icon (nascosta su desktop) */
 .menu-toggle {
-    display: none; /* Nascondi SEMPRE su desktop */
+    display: none; /* Nascondi SEMPRE su desktop. Mostrato solo in media query */
     background: none;
     border: none;
     cursor: pointer;
@@ -485,7 +482,7 @@ footer p {
 /* ---------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-    /* Nascondi i link desktop su mobile */
+    /* Nascondi i link desktop su mobile (vecchia classe, ora obsoleta se unificata) */
     .nav-desktop-links {
         display: none;
     }
@@ -495,12 +492,11 @@ footer p {
         display: block;
     }
 
-    /* Menu mobile a scomparsa - Stato Iniziale (nascosto) */
-    .nav-mobile-links {
-        display: flex; /* Forziamo display flex per consistenza */
-        flex-direction: column;
+    /* Modifica la lista di navigazione per il mobile (classe unificata) */
+    .nav-links {
+        flex-direction: column; /* Impila i link verticalmente */
         width: 100%;
-        position: fixed; /* CAMBIATO DA ABSOLUTE A FIXED */
+        position: fixed; /* Posiziona in modo fisso rispetto alla viewport */
         top: 70px; /* Altezza della navbar, così appare sotto di essa */
         left: 0;
         background-color: rgba(0, 0, 0, 0.98);
@@ -509,60 +505,43 @@ footer p {
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
         overflow-y: auto; /* Permette lo scroll interno se i link sono troppi */
-        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
+        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo (nascosto) */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none;
-        z-index: 1005 !important; /* NUOVO Z-INDEX ALTISSIMO PER IL MENU APERTO */
+        opacity: 0 !important; /* Forza l'opacità a 0 */
+        visibility: hidden !important; /* Forza la visibilità a nascosta */
+        pointer-events: none; /* Disabilita gli eventi del mouse quando nascosto */
+        z-index: 1005 !important; /* Z-INDEX ALTISSIMO PER IL MENU APERTO */
     }
 
     /* Menu mobile a scomparsa - Stato Aperto (classe is-open da JS) */
-    .nav-mobile-links.is-open {
+    .nav-links.is-open {
         transform: translateY(0) !important;
         opacity: 1 !important;
         visibility: visible !important;
-        pointer-events: auto;
+        pointer-events: auto; /* Riabilita gli eventi del mouse */
     }
 
-    .nav-mobile-links li {
-        margin: 10px 0;
+    /* Stili per i singoli link del menu mobile */
+    .nav-links li {
+        margin: 10px 0; /* Rimuove il margin-left e aggiunge margini verticali */
         text-align: center;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-mobile-links li:last-child {
+    .nav-links li:last-child {
         border-bottom: none;
     }
 
-    .nav-mobile-links a {
+    .nav-links a {
         font-size: 1.2em;
         padding: 10px 0;
         display: block;
         color: var(--text-on-dark);
     }
 
-    .nav-mobile-links a::after {
+    .nav-links a::after {
         bottom: -2px;
-    }
-
-    /* Mostra i titoli e i separatori su mobile */
-    .menu-section-title {
-        display: block;
-        margin-top: 25px;
-        margin-bottom: 15px;
-        font-size: 1.1em;
-        padding-left: 0;
-        text-align: center;
-    }
-
-    .menu-separator {
-        display: block;
-        width: 60%;
-        background-color: rgba(255, 0, 255, 0.3);
-        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-        margin: 20px auto;
     }
 
     /* Regolazioni Hero per Pagine Interne (hero-small) */
@@ -600,9 +579,9 @@ footer p {
         font-size: 1.1em;
     }
     .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr;
-        max-width: none;
-        margin-left: 20px;
+        grid-template-columns: 1fr; /* Fa sì che la griglia diventi una singola colonna */
+        max-width: none; /* Rimuove il max-width per occupare la larghezza del container */
+        margin-left: 20px; /* Aggiunge margini laterali per non attaccarsi ai bordi dello schermo */
         margin-right: 20px;
         gap: 30px;
     }
@@ -652,6 +631,9 @@ footer p {
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
     }
+    /* Queste classi (.menu-section-title, .menu-separator) non sono più usate con il menu unificato HTML,
+       ma le lascio per evitare errori se fossero presenti altrove o per riferimenti futuri.
+       Se non ci sono più nel tuo HTML del menu, possono essere rimosse in sicurezza. */
     .menu-section-title {
         font-size: 1em;
         margin-top: 20px;

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Gestione del Countdown
     const countdownElement = document.getElementById('countdown');
+    // La data target è il 8 agosto 2025 alle 16:00:00
     const targetDate = new Date('2025-08-08T16:00:00').getTime(); 
 
     if (countdownElement) {
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const distance = targetDate - now;
 
             if (distance < 0) {
-                countdownElement.innerHTML = "LA FESTA È STATA UN SUCCESSO. GRAZIE A TUTTI!";
+                countdownElement.innerHTML = "LA FESTA È IN CORSO O È GIÀ STATA!";
                 clearInterval(countdownInterval);
                 return;
             }
@@ -26,22 +27,59 @@ document.addEventListener('DOMContentLoaded', function() {
         const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // Gestione Hamburger Menu
+    // Gestione del Menu Hamburger
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-mobile-links');
+    // MODIFICA QUI: Ora selezioniamo la singola lista di navigazione unificata
+    const navLinks = document.querySelector('.nav-links'); 
+    const body = document.body; // Per impedire lo scroll del body
+
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('is-open');
-            menuToggle.classList.toggle('is-active');
-            document.body.classList.toggle('no-scroll');
+            this.classList.toggle('is-active'); // Per animare l'hamburger a X
+            body.classList.toggle('no-scroll'); // Blocca lo scroll del body
         });
 
+        // Chiudi il menu quando un link viene cliccato (su mobile)
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                document.body.classList.remove('no-scroll');
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('is-open')) {
+                    navLinks.classList.remove('is-open');
+                    menuToggle.classList.remove('is-active');
+                    body.classList.remove('no-scroll');
+                }
             });
         });
     }
+
+    // NUOVO CODICE: Animazione all'ingresso per i box (program-item, item-list)
+    const observerOptions = {
+        root: null, // Si riferisce alla viewport come root
+        rootMargin: '0px', // Nessun margine extra attorno alla root
+        threshold: 0.2 // L'elemento deve essere visibile per almeno il 20% per attivare l'osservatore
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // L'elemento è entrato nella viewport
+                entry.target.classList.add('in-view');
+                // Se vuoi che l'animazione avvenga solo una volta, disconnetti l'observer per quell'elemento:
+                // observer.unobserve(entry.target);
+            } else {
+                // L'elemento è uscito dalla viewport
+                // Se vuoi che torni allo stato originale quando esce, aggiungi:
+                // entry.target.classList.remove('in-view');
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Seleziona tutti i box che vuoi animare (sia program-item che item-list)
+    const animatedBoxes = document.querySelectorAll('.program-item, .item-list');
+
+    animatedBoxes.forEach(box => {
+        observer.observe(box);
+    });
 });
