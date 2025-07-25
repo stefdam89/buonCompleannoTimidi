@@ -453,7 +453,7 @@ footer p {
 
     /* Menu mobile a scomparsa - Stato Iniziale (nascosto) */
     .nav-mobile-links {
-        display: flex; /* IMPORTANTISSIMO: Ora è SEMPRE flex dentro la media query */
+        display: flex; /* Forziamo display flex per consistenza */
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -468,19 +468,19 @@ footer p {
         overflow-y: auto;
         transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
-        opacity: 0;
-        visibility: hidden; /* Nascondi completamente all'inizio */
+        opacity: 0 !important; /* Forza opacità a 0 quando chiuso */
+        visibility: hidden !important; /* Forza visibilità nascosta quando chiuso */
         pointer-events: none; /* Non intercettare click quando nascosto */
         z-index: 999; /* Sotto logo/hamburger, ma sopra il contenuto della pagina */
     }
 
     /* Menu mobile a scomparsa - Stato Aperto (classe is-open da JS) */
     .nav-mobile-links.is-open {
-        transform: translateY(0); /* Porta dentro lo schermo */
-        opacity: 1;
-        visibility: visible; /* Rendi visibile */
+        transform: translateY(0) !important; /* Porta dentro lo schermo, forza! */
+        opacity: 1 !important; /* Rendi visibile, forza! */
+        visibility: visible !important; /* Rendi visibile, forza! */
         pointer-events: auto; /* Abilita i click */
-        z-index: 1000; /* Porta sopra tutto il resto */
+        z-index: 1000 !important; /* Porta sopra tutto il resto, forza! */
     }
 
     .nav-mobile-links li {
@@ -498,6 +498,7 @@ footer p {
         font-size: 1.2em;
         padding: 10px 0;
         display: block;
+        color: var(--text-on-dark); /* Assicura che il testo sia visibile */
     }
 
     .nav-mobile-links a::after {
