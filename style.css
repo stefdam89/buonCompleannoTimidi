@@ -29,7 +29,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    background: url('BG_festa_timidi.png') no-repeat center center fixed; /* Immagine di sfondo aggiornata */
+    background: url('BG_festa_timidi.png') no-repeat center center fixed;
     background-size: cover;
     overflow-x: hidden;
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
@@ -364,7 +364,7 @@ footer p {
 /* Stili per il menu mobile (nascosto di default su desktop) */
 .nav-mobile-links {
     list-style: none;
-    display: none; /* Nascosto su desktop, mostrato da JS su mobile */
+    display: none; /* Nascosto su desktop */
     margin: 0;
     padding: 0;
 }
@@ -462,7 +462,7 @@ footer p {
 @media (max-width: 900px) {
     /* Navbar per Mobile (hamburger menu) */
     .navbar .container {
-        flex-direction: row; /* Mantieni logo e hamburger sulla stessa riga */
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
@@ -479,41 +479,45 @@ footer p {
 
     /* Stili del menu mobile a scomparsa */
     .nav-mobile-links {
-        display: none; /* Nascosto di default */
+        /* display: none; */ /* Rimosso o commentato da qui */
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 100%; /* Sotto la navbar */
+        top: 100%;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.95); /* Sfondo menu a scomparsa */
+        background-color: rgba(0, 0, 0, 0.98); /* Leggermente più opaco */
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         height: auto;
-        max-height: calc(100vh - 70px); /* Limita altezza per non uscire dallo schermo (70px è approx altezza navbar) */
-        overflow-y: auto; /* Abilita lo scroll se il menu è troppo lungo */
-        transform: translateY(-100%); /* Nascondi fuori dallo schermo */
-        transition: transform 0.3s ease-in-out, opacity 0.3s ease; /* Animazione slide */
-        opacity: 0; /* Inizialmente trasparente */
-        pointer-events: none; /* Non intercettare eventi quando nascosto */
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Aggiunto 'visibility' */
+        opacity: 0;
+        visibility: hidden; /* Nascosto di default con visibilità */
+        pointer-events: none;
+        z-index: 999; /* Assicura che sia sotto il logo e hamburger quando chiuso, sopra quando aperto */
     }
 
     .nav-mobile-links.is-open { /* Classe aggiunta da JS per mostrare il menu */
-        display: flex;
-        transform: translateY(0); /* Fai scorrere dentro lo schermo */
-        opacity: 1; /* Rendi visibile */
-        pointer-events: auto; /* Intercetta gli eventi */
+        display: flex; /* Riattiviamo display flex quando aperto */
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible; /* Rendi visibile */
+        pointer-events: auto;
+        z-index: 1000; /* Assicura che sia sopra gli altri contenuti */
     }
 
     .nav-mobile-links li {
         margin: 10px 0;
         text-align: center;
         padding: 5px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separatore tra voci */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-mobile-links li:last-child {
-        border-bottom: none; /* Rimuovi bordo dall'ultima voce del menu */
+        border-bottom: none;
     }
 
     .nav-mobile-links a {
