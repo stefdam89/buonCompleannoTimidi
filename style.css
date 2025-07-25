@@ -194,10 +194,16 @@ body.no-scroll {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 50px;
     margin-top: 40px;
-    text-align: left;
+    text-align: left; /* Mantiene l'allineamento del testo all'interno delle colonne */
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; /* NUOVO: Centra la griglia stessa */
+    margin-right: auto; /* NUOVO: Centra la griglia stessa */
+
+    /* NUOVO: Aggiunge la centratura del contenuto della griglia. */
+    /* Utile se hai meno colonne di quante ne permetterebbe la griglia,
+       ad esempio 2 colonne in uno spazio per 3, o 1 colonna per 2. */
+    justify-content: center; /* Centra gli elementi della griglia nell'asse principale */
+    align-items: flex-start; /* Allinea gli elementi in alto verticalmente */
 }
 
 .grid-3-cols {
