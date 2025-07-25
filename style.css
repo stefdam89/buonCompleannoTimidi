@@ -147,7 +147,7 @@ body.no-scroll {
     text-align: center;
     background-color: var(--section-solid-bg);
     color: var(--text-on-dark);
-    margin-top: 40px; /* Riportato al valore originale, come richiesto */
+    margin-top: 40px;
     margin-bottom: 40px;
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
@@ -156,7 +156,7 @@ body.no-scroll {
     position: relative; /* Necessario per z-index */
 }
 
-/* RIMOSSA la regola .section.first-section-no-margin */
+/* RIMOSSA la regola .section.first-section-no-margin (perché è stata ripristinata la versione precedente) */
 
 .section h2 {
     font-family: var(--font-heading);
@@ -290,11 +290,11 @@ footer p {
 /* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
 /* Questa regola risolve l'accavallamento su mobile */
 .hero.hero-small .subtitle {
-    margin-bottom: 40px; /* Aumenta questo valore per più spazio dal basso */
+    margin-bottom: 50px; /* AUMENTATO per più spazio dal basso */
 }
 .hero.hero-small .hero-content {
     padding-top: 100px; /* Mantiene il padding superiore */
-    padding-bottom: 40px; /* Aggiunge spazio sotto il contenuto per evitare accavallamenti */
+    padding-bottom: 50px; /* AUMENTATO per più spazio sotto il contenuto */
 }
 
 
@@ -570,9 +570,12 @@ footer p {
     .hero-small {
         height: 30vh; /* Ridotto ulteriormente per mobile, se necessario */
     }
-    .hero-small .hero-content {
+    .hero.hero-small .subtitle {
+        margin-bottom: 60px; /* ULTERIORE AUMENTO per mobile */
+    }
+    .hero.hero-small .hero-content {
         padding-top: 80px; /* Regolato il padding superiore per allineamento */
-        padding-bottom: 30px; /* Spazio aggiuntivo sotto il contenuto per mobile */
+        padding-bottom: 50px; /* ULTERIORE AUMENTO dello spazio sotto il contenuto per mobile */
     }
 
     /* Ridimensionamenti generali per schermi intermedi */
@@ -611,9 +614,12 @@ footer p {
     .hero-small {
         height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
     }
-    .hero-small .hero-content {
+    .hero.hero-small .subtitle {
+        margin-bottom: 65px; /* ULTERIORE AUMENTO per schermi molto piccoli */
+    }
+    .hero.hero-small .hero-content {
         padding-top: 60px; /* Adattamento del padding superiore per schermi molto piccoli */
-        padding-bottom: 25px; /* Ulteriore aggiustamento del padding inferiore */
+        padding-bottom: 40px; /* ULTERIORE AUMENTO del padding inferiore per schermi molto piccoli */
     }
 
     .hero h1 {
