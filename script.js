@@ -1,28 +1,53 @@
+// Questo è il punto di inizio del tuo script, dovrebbe esserci già.
 document.addEventListener('DOMContentLoaded', function() {
+    // QUI DENTRO CI VA TUTTO IL TUO CODICE JS
+
+    // Gestione del Countdown (questo dovrebbe essere il tuo codice esistente)
     const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date('2025-08-08T16:00:00').getTime(); 
 
-    // Data dell'evento: 8 Agosto 2025
-    const eventDate = new Date('2025-08-08T00:00:00'); // Anno-Mese-GiornoTHH:MM:SS (Mese è 0-based in JS, ma qui è YYYY-MM-DD)
+    if (countdownElement) {
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-    function updateCountdown() {
-        const now = new Date();
-        const timeLeft = eventDate - now; // Differenza in millisecondi
+            if (distance < 0) {
+                countdownElement.innerHTML = "LA FESTA È IN CORSO O È GIÀ STATA!";
+                clearInterval(countdownInterval);
+                return;
+            }
 
-        if (timeLeft <= 0) {
-            countdownElement.innerHTML = "La festa è iniziata!";
-            clearInterval(interval); // Ferma l'aggiornamento del countdown
-            return;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        countdownElement.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // Aggiorna il countdown ogni secondo
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Esegui subito per evitare un ritardo iniziale
-});
+    // NUOVO: Gestione Hamburger Menu (inserisci questa parte qui sotto il countdown)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('is-open');
+            menuToggle.classList.toggle('is-active');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('is-open');
+                menuToggle.classList.remove('is-active');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+    }
+
+    // FINE DI TUTTO IL TUO CODICE JS
+}); // Questa parentesi graffa chiude la function di DOMContentLoaded

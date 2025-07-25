@@ -35,6 +35,11 @@ body {
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
 }
 
+/* Impedisce lo scroll del body quando il menu è aperto (aggiunto per mobile menu) */
+body.no-scroll {
+    overflow: hidden;
+}
+
 /* Il container limita la larghezza del CONTENUTO all'interno delle sezioni */
 .container {
     max-width: 1100px;
@@ -145,7 +150,7 @@ body {
     margin-bottom: 40px;
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-    scroll-margin-top: 100px; /* Aggiungi questa riga */
+    scroll-margin-top: 100px; /* Per far vedere il titolo sotto la navbar sticky */
 }
 
 .section h2 {
@@ -204,7 +209,7 @@ body {
 }
 
 .program-item, .item-list {
-    background-color: var(--card-bg-transparent-light); /* MODIFICATO: Sfondo delle card: estremamente trasparente */
+    background-color: var(--card-bg-transparent-light); /* Sfondo delle card: estremamente trasparente */
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -263,26 +268,280 @@ footer {
     border-top: 5px solid var(--secondary-color);
     margin-top: 40px;
     box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-    scroll-margin-top: 100px; /* Aggiungi questa riga */
+    scroll-margin-top: 100px; /* Per far vedere il titolo sotto la navbar sticky */
 }
 
 footer p {
     margin-bottom: 10px;
 }
 
-/* Media Queries per la Responsività */
+/* Stile per Header di pagine interne (più corto) */
+.hero-small {
+    height: 40vh; /* O un valore in pixel, es. 300px */
+}
+
+/* ---------------------------------------------------------------------- */
+/* NUOVI STILI PER LA NAVBAR E HAMBURGER MENU */
+/* ---------------------------------------------------------------------- */
+
+.navbar {
+    background-color: var(--section-solid-bg);
+    color: var(--text-on-dark);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary-color);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Per posizionare il menu-toggle */
+}
+
+.navbar .logo {
+    font-family: var(--font-heading);
+    font-size: 2em;
+    font-weight: 700;
+    z-index: 1001; /* Assicura che il logo sia sopra il menu quando è aperto */
+}
+
+.navbar .logo a {
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--primary-color);
+    transition: text-shadow 0.3s ease;
+}
+
+.navbar .logo a:hover {
+    text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex; /* Display flex per desktop */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .nav-links li {
+    margin-left: 30px;
+}
+
+.navbar .nav-links a {
+    color: var(--text-on-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 8px var(--secondary-color);
+}
+
+.navbar .nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Stili specifici per i titoli delle sezioni nel menu (solo mobile) */
+.menu-section-title {
+    font-family: var(--font-heading);
+    color: var(--accent-color);
+    font-size: 0.9em;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding-left: 10px; /* Indenta leggermente i titoli */
+    display: none; /* Nascosto di default su desktop */
+}
+
+/* Stili per il separatore nel menu (solo mobile) */
+.menu-separator {
+    width: 80%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    display: none; /* Nascosto di default su desktop */
+}
+
+
+/* Hamburger Menu Styles */
+.menu-toggle {
+    display: none; /* Nascosto su desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 1002; /* Sopra la navbar e il logo quando aperto */
+}
+
+.hamburger {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: relative;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    transition: transform 0.3s ease, top 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+.hamburger::before {
+    top: -10px;
+}
+
+.hamburger::after {
+    top: 10px;
+}
+
+/* Animazione Hamburger a X */
+.menu-toggle.is-active .hamburger {
+    background-color: transparent; /* Nasconde la barra centrale */
+    box-shadow: none;
+}
+
+.menu-toggle.is-active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 8px var(--secondary-color);
+}
+
+.menu-toggle.is-active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 8px var(--secondary-color);
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* MEDIA QUERIES FINALI (RIORGANIZZATE E AGGIORNATE) */
+/* ---------------------------------------------------------------------- */
+
+/* Media Queries per la Responsività Generale */
 @media (max-width: 900px) {
+    /* Navbar per Mobile (hamburger menu) */
+    .navbar .container {
+        flex-direction: row; /* Mantieni logo e hamburger sulla stessa riga */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra l'hamburger su mobile */
+    }
+
+    .navbar .nav-links {
+        display: none; /* Nascondi il menu di default */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Sotto la navbar */
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.95); /* Sfondo menu a scomparsa */
+        padding: 20px 0;
+        border-top: 1px solid var(--primary-color);
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+        height: auto; /* Adatta l'altezza al contenuto */
+        overflow-y: auto; /* Abilita lo scroll se il menu è troppo lungo */
+        transform: translateY(-100%); /* Nascondi fuori dallo schermo */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease; /* Animazione slide */
+        opacity: 0; /* Inizialmente trasparente */
+        pointer-events: none; /* Non intercettare eventi quando nascosto */
+    }
+
+    .navbar .nav-links.is-open { /* Classe aggiunta da JS per mostrare il menu */
+        display: flex;
+        transform: translateY(0); /* Fai scorrere dentro lo schermo */
+        opacity: 1; /* Rendi visibile */
+        pointer-events: auto; /* Intercetta gli eventi */
+    }
+
     .navbar .nav-links li {
-    margin: 5px 10px; /* Riduci ulteriormente lo spazio tra le voci del menu per schermi stretti */
+        margin: 10px 0; /* Riduci il margine per mobile */
+        text-align: center;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separatore tra voci */
+    }
+
+    .navbar .nav-links li:last-child {
+        border-bottom: none; /* Rimuovi bordo dall'ultima voce del menu */
+    }
+
+    .navbar .nav-links a {
+        font-size: 1.2em; /* Rendi i link più grandi su mobile */
+        padding: 10px 0;
+        display: block; /* Rendi l'intera area del link cliccabile */
+    }
+
+    .navbar .nav-links a::after {
+        bottom: -2px; /* Aggiusta posizione sottolineatura */
+    }
+
+    /* Mostra i titoli e i separatori su mobile */
+    .menu-section-title {
+        display: block;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size: 1.1em; /* Un po' più grande per i titoli di sezione */
+        padding-left: 0; /* Centra il testo */
+        text-align: center;
+    }
+
+    .menu-separator {
+        display: block;
+        width: 60%;
+        background-color: rgba(255, 0, 255, 0.3); /* Colore fluo per il separatore mobile */
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        margin: 20px auto; /* Centra il separatore */
+    }
+
+    /* Regolazioni Hero per Pagine Interne (hero-small) */
+    .hero-small {
+        height: 30vh; /* Ancora più corto su schermi intermedi */
     }
     .hero-small .hero-content {
-        padding-top: 100px; /* Aggiungi un padding superiore per lasciare spazio alla navbar */
+        padding-top: 100px; /* Spingi giù il contenuto per navbar fissa */
     }
-    .hero h1 { /* Riduci ulteriormente la dimensione del titolo per schermi intermedi */
-        font-size: 2.8em; /* Ridotto da 3.5em per maggiore spazio */
+    
+    /* Ridimensionamenti generali per schermi intermedi */
+    .hero h1 {
+        font-size: 2.8em;
     }
     .hero .subtitle {
-        font-size: 1.6em; /* Ridotto da 1.8em */
+        font-size: 1.6em;
     }
     .countdown {
         font-size: 2.8em;
@@ -298,7 +557,7 @@ footer p {
         font-size: 1.1em;
     }
     .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Impila le colonne su schermi più piccoli */
         max-width: none;
         margin-left: 20px;
         margin-right: 20px;
@@ -310,11 +569,17 @@ footer p {
 }
 
 @media (max-width: 600px) {
-    .hero-small .hero-content {
-        padding-top: 80px; /* Riduci il padding su schermi molto piccoli se necessario */
+    /* Regolazioni Hero per Pagine Interne (hero-small) */
+    .hero-small {
+        height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
     }
+    .hero-small .hero-content {
+        padding-top: 80px; /* Riduci ulteriormente il padding */
+    }
+
+    /* Ridimensionamenti generali per schermi molto piccoli */
     .hero h1 {
-        font-size: 1.8em; /* Ulteriore riduzione per schermi molto piccoli */
+        font-size: 1.8em;
     }
     .hero .subtitle {
         font-size: 1.2em;
@@ -340,127 +605,14 @@ footer p {
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
     }
-}
-
-/* Stili per la Navbar - NUOVI */
-.navbar {
-    background-color: var(--section-solid-bg); /* Sfondo come le sezioni */
-    color: var(--text-on-dark);
-    padding: 15px 0;
-    position: sticky; /* Rende la navbar fissa in alto quando si scorre */
-    top: 0;
-    z-index: 1000; /* Assicura che la navbar sia sopra gli altri elementi */
-    border-bottom: 2px solid var(--primary-color); /* Bordo neon sotto */
-    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3); /* Ombra neon */
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar .logo {
-    font-family: var(--font-heading);
-    font-size: 2em;
-    font-weight: 700;
-}
-
-.navbar .logo a {
-    color: var(--primary-color); /* Colore neon per il logo */
-    text-decoration: none;
-    text-shadow: 0 0 5px var(--primary-color);
-    transition: text-shadow 0.3s ease;
-}
-
-.navbar .logo a:hover {
-    text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color); /* Bagliore diverso all'hover */
-}
-
-.navbar .nav-links {
-    list-style: none;
-    display: flex;
-}
-
-.navbar .nav-links li {
-    margin-left: 30px; /* Spazio tra le voci del menu */
-}
-
-.navbar .nav-links a {
-    color: var(--text-on-dark);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1em;
-    position: relative;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.navbar .nav-links a::after { /* Sottolineatura animata */
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 3px;
-    background-color: var(--secondary-color);
-    transition: width 0.3s ease;
-}
-
-.navbar .nav-links a:hover {
-    color: var(--secondary-color); /* Cambia colore all'hover */
-    text-shadow: 0 0 8px var(--secondary-color);
-}
-
-.navbar .nav-links a:hover::after {
-    width: 100%; /* La sottolineatura appare all'hover */
-}
-
-/* Media Queries per la Navbar (per renderla responsive su schermi piccoli) */
-@media (max-width: 900px) {
-    .navbar .container {
-        flex-direction: column; /* Impila logo e menu su schermi piccoli */
-        text-align: center;
-    }
-
-    .navbar .logo {
+    /* Menu mobile specifico per 600px */
+    .menu-section-title {
+        font-size: 1em;
+        margin-top: 20px;
         margin-bottom: 10px;
     }
-
-    .navbar .nav-links {
-        flex-wrap: wrap; /* Avvolge le voci su più righe se non c'è spazio */
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .navbar .nav-links li {
-        margin: 5px 15px; /* Spazio ridotto per mobile */
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar .logo {
-        font-size: 1.8em;
-    }
-
-    .navbar .nav-links a {
-        font-size: 0.95em;
-    }
-}
-
-/* Stile per Header di pagine interne (più corto) */
-.hero-small {
-    height: 40vh; /* O un valore in pixel, es. 300px */
-}
-
-/* Media Query per header piccoli su mobile */
-@media (max-width: 900px) {
-    .hero-small {
-        height: 30vh; /* Ancora più corto su schermi piccoli */
-    }
-}
-
-@media (max-width: 600px) {
-    .hero-small {
-        height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
+    .menu-separator {
+        width: 50%; /* Separatore leggermente più piccolo */
+        margin: 15px auto;
     }
 }
