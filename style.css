@@ -188,6 +188,11 @@ body.no-scroll {
     color: var(--text-on-dark);
 }
 
+/* Stili per la prima sezione delle pagine interne senza margine superiore */
+.section.first-section-no-margin {
+    margin-top: 0;
+}
+
 /* Griglie per Programma e Cosa Portare */
 .grid-2-cols {
     display: grid;
