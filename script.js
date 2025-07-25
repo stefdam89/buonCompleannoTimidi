@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Gestione del Countdown
     const countdownElement = document.getElementById('countdown');
-    // La data target è il 8 agosto 2025 alle 16:00:00
     const targetDate = new Date('2025-08-08T16:00:00').getTime(); 
 
     if (countdownElement) {
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const distance = targetDate - now;
 
             if (distance < 0) {
-                countdownElement.innerHTML = "LA FESTA È IN CORSO O È GIÀ STATA!";
+                countdownElement.innerHTML = "LA FESTA È STATA UN SUCCESSO. GRAZIE A TUTTI!";
                 clearInterval(countdownInterval);
                 return;
             }
@@ -27,27 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // Gestione del Menu Hamburger
+    // Gestione Hamburger Menu
     const menuToggle = document.querySelector('.menu-toggle');
-    // MODIFICA QUI: Ora selezioniamo la singola lista di navigazione
-    const navLinks = document.querySelector('.nav-links'); 
-    const body = document.body; // Per impedire lo scroll del body
-
+    const navLinks = document.querySelector('.nav-mobile-links');
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('is-open');
-            this.classList.toggle('is-active'); // Per animare l'hamburger a X
-            body.classList.toggle('no-scroll'); // Blocca lo scroll del body
+            menuToggle.classList.toggle('is-active');
+            document.body.classList.toggle('no-scroll');
         });
 
-        // Chiudi il menu quando un link viene cliccato (su mobile)
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('is-open')) {
-                    navLinks.classList.remove('is-open');
-                    menuToggle.classList.remove('is-active');
-                    body.classList.remove('no-scroll');
-                }
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('is-open');
+                menuToggle.classList.remove('is-active');
+                document.body.classList.remove('no-scroll');
             });
         });
     }

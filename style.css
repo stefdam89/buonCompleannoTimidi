@@ -283,7 +283,8 @@ footer p {
 /* Stile per Header di pagine interne (più corto) */
 .hero-small {
     height: 40vh; /* Altezza di default per desktop/tablet */
-    justify-content: center; /* Manteniamo la centratura del contenuto */
+    /* Rimuovi completamente justify-content per evitare conflitti */
+    justify-content: center; /* Torniamo al default di centratura */
 }
 
 /* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
@@ -298,7 +299,7 @@ footer p {
 
 
 /* ---------------------------------------------------------------------- */
-/* NAVBAR E HAMBURGER MENU - MODIFICATO PER MENU UNIFICATO */
+/* NAVBAR E HAMBURGER MENU */
 /* ---------------------------------------------------------------------- */
 
 .navbar {
@@ -337,19 +338,19 @@ footer p {
     text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
 }
 
-/* Link di navigazione generale (desktop default) */
-.nav-links {
+/* Link desktop (visibili solo su desktop) */
+.nav-desktop-links {
     list-style: none;
-    display: flex; /* Rende i link orizzontali su desktop */
+    display: flex;
     margin: 0;
     padding: 0;
 }
 
-.nav-links li {
+.nav-desktop-links li {
     margin-left: 30px;
 }
 
-.nav-links a {
+.nav-desktop-links a {
     color: var(--text-on-dark);
     text-decoration: none;
     font-weight: 600;
@@ -358,7 +359,7 @@ footer p {
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.nav-links a::after {
+.nav-desktop-links a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -369,18 +370,31 @@ footer p {
     transition: width 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-desktop-links a:hover {
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color);
 }
 
-.nav-links a:hover::after {
+.nav-desktop-links a:hover::after {
     width: 100%;
+}
+
+/* Menu mobile (nascosto di default, gestito da JS nelle media query) */
+.nav-mobile-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none; /* Nascondi SEMPRE su desktop. Verrà mostrato con flex solo in media query */
+}
+
+/* Titoli e separatori nel menu mobile (nascosti su desktop) */
+.menu-section-title, .menu-separator {
+    display: none;
 }
 
 /* Hamburger icon (nascosta su desktop) */
 .menu-toggle {
-    display: none; /* Nascondi SEMPRE su desktop. Mostrato solo in media query */
+    display: none; /* Nascondi SEMPRE su desktop */
     background: none;
     border: none;
     cursor: pointer;
@@ -471,12 +485,22 @@ footer p {
 /* ---------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-    /* Nascondi la lista di navigazione su desktop */
-    .nav-links {
-        /* Trasformiamo la lista per il mobile */
-        flex-direction: column; /* Impila i link verticalmente */
+    /* Nascondi i link desktop su mobile */
+    .nav-desktop-links {
+        display: none;
+    }
+
+    /* Mostra l'hamburger su mobile */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Menu mobile a scomparsa - Stato Iniziale (nascosto) */
+    .nav-mobile-links {
+        display: flex; /* Forziamo display flex per consistenza */
+        flex-direction: column;
         width: 100%;
-        position: fixed; /* Posiziona in modo fisso rispetto alla viewport */
+        position: fixed; /* CAMBIATO DA ABSOLUTE A FIXED */
         top: 70px; /* Altezza della navbar, così appare sotto di essa */
         left: 0;
         background-color: rgba(0, 0, 0, 0.98);
@@ -485,44 +509,60 @@ footer p {
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
         overflow-y: auto; /* Permette lo scroll interno se i link sono troppi */
-        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo (nascosto) */
+        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none;
-        z-index: 1005 !important; /* Z-INDEX ALTISSIMO PER IL MENU APERTO */
+        z-index: 1005 !important; /* NUOVO Z-INDEX ALTISSIMO PER IL MENU APERTO */
     }
 
-    /* Mostra il menu quando la classe is-open è attiva (gestita da JS) */
-    .nav-links.is-open {
+    /* Menu mobile a scomparsa - Stato Aperto (classe is-open da JS) */
+    .nav-mobile-links.is-open {
         transform: translateY(0) !important;
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto;
     }
 
-    /* Mostra l'hamburger su mobile */
-    .menu-toggle {
-        display: block;
-    }
-
-    /* Stili per i singoli link del menu mobile */
-    .nav-links li {
-        margin: 10px 0; /* Rimuove il margin-left e aggiunge margini verticali */
+    .nav-mobile-links li {
+        margin: 10px 0;
         text-align: center;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-links li:last-child {
+    .nav-mobile-links li:last-child {
         border-bottom: none;
     }
 
-    .nav-links a {
+    .nav-mobile-links a {
         font-size: 1.2em;
         padding: 10px 0;
-        display: block; /* Rende il link cliccabile per tutta la larghezza */
+        display: block;
         color: var(--text-on-dark);
+    }
+
+    .nav-mobile-links a::after {
+        bottom: -2px;
+    }
+
+    /* Mostra i titoli e i separatori su mobile */
+    .menu-section-title {
+        display: block;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .menu-separator {
+        display: block;
+        width: 60%;
+        background-color: rgba(255, 0, 255, 0.3);
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        margin: 20px auto;
     }
 
     /* Regolazioni Hero per Pagine Interne (hero-small) */
@@ -560,9 +600,9 @@ footer p {
         font-size: 1.1em;
     }
     .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr; /* Fa sì che la griglia diventi una singola colonna */
-        max-width: none; /* Rimuove il max-width per occupare la larghezza del container */
-        margin-left: 20px; /* Aggiunge margini laterali per non attaccarsi ai bordi dello schermo */
+        grid-template-columns: 1fr;
+        max-width: none;
+        margin-left: 20px;
         margin-right: 20px;
         gap: 30px;
     }
@@ -612,12 +652,12 @@ footer p {
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
     }
-    .menu-section-title { /* Non più usati ma lasciati per compatibilità se ci fossero ancora nell'HTML */
+    .menu-section-title {
         font-size: 1em;
         margin-top: 20px;
         margin-bottom: 10px;
     }
-    .menu-separator { /* Non più usati ma lasciati per compatibilità se ci fossero ancora nell'HTML */
+    .menu-separator {
         width: 50%;
         margin: 15px auto;
     }
