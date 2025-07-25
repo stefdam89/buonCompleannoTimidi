@@ -156,8 +156,6 @@ body.no-scroll {
     position: relative; /* Necessario per z-index */
 }
 
-/* RIMOSSA la regola .section.first-section-no-margin (perché è stata ripristinata la versione precedente) */
-
 .section h2 {
     font-family: var(--font-heading);
     font-size: 3.2em;
@@ -284,16 +282,19 @@ footer p {
 
 /* Stile per Header di pagine interne (più corto) */
 .hero-small {
-    height: 40vh;
+    height: 40vh; /* Altezza di default per desktop/tablet */
+    /* Aggiustiamo la giustificazione del contenuto per mantenere il testo più in basso */
+    justify-content: flex-end; /* Sposta il contenuto in basso nell'hero-small */
 }
 
 /* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
 /* Questa regola risolve l'accavallamento su mobile */
 .hero.hero-small .subtitle {
-    margin-bottom: 50px; /* AUMENTATO per più spazio dal basso */
+    margin-bottom: 50px; /* Mantieniamo questo, o aumentiamo se serve di più spazio tra sottotitolo e linea */
 }
 .hero.hero-small .hero-content {
-    padding-top: 100px; /* Mantiene il padding superiore */
+    /* Rimuoviamo il padding-top fisso qui per permettere a justify-content di fare il suo lavoro */
+    padding-top: 0; /* Rimuovi questo per non forzare troppo l'altezza */
     padding-bottom: 50px; /* AUMENTATO per più spazio sotto il contenuto */
 }
 
@@ -507,7 +508,6 @@ footer p {
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
-        /* height: auto;  <-- Rimosso per migliorare la gestione di max-height */
         max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
         overflow-y: auto; /* Permette lo scroll interno se i link sono troppi */
         transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
@@ -568,13 +568,14 @@ footer p {
 
     /* Regolazioni Hero per Pagine Interne (hero-small) */
     .hero-small {
-        height: 30vh; /* Ridotto ulteriormente per mobile, se necessario */
+        height: 30vh;
+        /* Rimosso justify-content: flex-end; qui, lo gestiremo con padding-top su hero-content */
     }
     .hero.hero-small .subtitle {
         margin-bottom: 60px; /* ULTERIORE AUMENTO per mobile */
     }
     .hero.hero-small .hero-content {
-        padding-top: 80px; /* Regolato il padding superiore per allineamento */
+        padding-top: 100px; /* AUMENTATO per dare più spazio in alto */
         padding-bottom: 50px; /* ULTERIORE AUMENTO dello spazio sotto il contenuto per mobile */
     }
 
@@ -618,7 +619,7 @@ footer p {
         margin-bottom: 65px; /* ULTERIORE AUMENTO per schermi molto piccoli */
     }
     .hero.hero-small .hero-content {
-        padding-top: 60px; /* Adattamento del padding superiore per schermi molto piccoli */
+        padding-top: 80px; /* AUMENTATO SIGNIFICATIVAMENTE per schermi molto piccoli */
         padding-bottom: 40px; /* ULTERIORE AUMENTO del padding inferiore per schermi molto piccoli */
     }
 
