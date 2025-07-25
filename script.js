@@ -28,8 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gestione Hamburger Menu
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-mobile-links'); // *** QUESTA RIGA È FONDAMENTALE ***
-
+const navLinks = document.querySelector('.nav-mobile-links');
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('is-open');

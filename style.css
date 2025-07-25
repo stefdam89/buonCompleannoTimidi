@@ -281,7 +281,7 @@ footer p {
 }
 
 /* ---------------------------------------------------------------------- */
-/* NUOVI STILI PER LA NAVBAR E HAMBURGER MENU */
+/* NAVBAR E HAMBURGER MENU */
 /* ---------------------------------------------------------------------- */
 
 .navbar {
@@ -306,7 +306,7 @@ footer p {
     font-family: var(--font-heading);
     font-size: 2em;
     font-weight: 700;
-    z-index: 1001;
+    z-index: 1001; /* Il logo deve essere sopra tutto */
 }
 
 .navbar .logo a {
@@ -320,10 +320,10 @@ footer p {
     text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
 }
 
-/* Stili per i link desktop (sempre visibili su desktop) */
+/* Link desktop (visibili solo su desktop) */
 .nav-desktop-links {
     list-style: none;
-    display: flex; /* Visibile su desktop */
+    display: flex; /* Visibile su desktop per impostazione predefinita */
     margin: 0;
     padding: 0;
 }
@@ -361,46 +361,28 @@ footer p {
     width: 100%;
 }
 
-/* Stili per il menu mobile (nascosto di default su desktop) */
+/* Menu mobile (nascosto di default, gestito da JS nelle media query) */
 .nav-mobile-links {
     list-style: none;
-    display: none; /* Nascosto su desktop */
     margin: 0;
     padding: 0;
+    display: none; /* Nascondi SEMPRE su desktop. Verrà mostrato con flex solo in media query */
 }
 
-/* Stili specifici per i titoli delle sezioni nel menu mobile */
-.menu-section-title {
-    font-family: var(--font-heading);
-    color: var(--accent-color);
-    font-size: 0.9em;
-    text-transform: uppercase;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    font-weight: 700;
-    padding-left: 10px;
-    display: none; /* Nascosto di default su desktop */
+/* Titoli e separatori nel menu mobile (nascosti su desktop) */
+.menu-section-title, .menu-separator {
+    display: none;
 }
 
-/* Stili per il separatore nel menu mobile */
-.menu-separator {
-    width: 80%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 20px auto;
-    display: none; /* Nascosto di default su desktop */
-}
-
-/* Hamburger Menu Styles */
+/* Hamburger icon (nascosta su desktop) */
 .menu-toggle {
-    display: none; /* Nascosto su desktop */
+    display: none; /* Nascondi SEMPRE su desktop */
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
     position: relative;
-    z-index: 1002;
+    z-index: 1002; /* Sempre sopra il menu */
 }
 
 .hamburger {
@@ -435,7 +417,7 @@ footer p {
 
 /* Animazione Hamburger a X */
 .menu-toggle.is-active .hamburger {
-    background-color: transparent; /* Nasconde la barra centrale */
+    background-color: transparent;
     box-shadow: none;
 }
 
@@ -455,18 +437,10 @@ footer p {
 
 
 /* ---------------------------------------------------------------------- */
-/* MEDIA QUERIES FINALI (RIORGANIZZATE E AGGIORNATE) */
+/* MEDIA QUERIES FINALI (Cruciali per il Mobile) */
 /* ---------------------------------------------------------------------- */
 
-/* Media Query per Schermi Intermedi e Mobile (max-width: 900px) */
 @media (max-width: 900px) {
-    /* Navbar per Mobile (hamburger menu) */
-    .navbar .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     /* Nascondi i link desktop su mobile */
     .nav-desktop-links {
         display: none;
@@ -477,36 +451,36 @@ footer p {
         display: block;
     }
 
-    /* Stili del menu mobile a scomparsa */
+    /* Menu mobile a scomparsa - Stato Iniziale (nascosto) */
     .nav-mobile-links {
-        /* display: none; */ /* Rimosso o commentato da qui */
+        display: flex; /* IMPORTANTISSIMO: Ora è SEMPRE flex dentro la media query */
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 100%;
+        top: 100%; /* Inizia sotto la navbar */
         left: 0;
-        background-color: rgba(0, 0, 0, 0.98); /* Leggermente più opaco */
+        background-color: rgba(0, 0, 0, 0.98);
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         height: auto;
         max-height: calc(100vh - 70px);
         overflow-y: auto;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease; /* Aggiunto 'visibility' */
+        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
         opacity: 0;
-        visibility: hidden; /* Nascosto di default con visibilità */
-        pointer-events: none;
-        z-index: 999; /* Assicura che sia sotto il logo e hamburger quando chiuso, sopra quando aperto */
+        visibility: hidden; /* Nascondi completamente all'inizio */
+        pointer-events: none; /* Non intercettare click quando nascosto */
+        z-index: 999; /* Sotto logo/hamburger, ma sopra il contenuto della pagina */
     }
 
-    .nav-mobile-links.is-open { /* Classe aggiunta da JS per mostrare il menu */
-        display: flex; /* Riattiviamo display flex quando aperto */
-        transform: translateY(0);
+    /* Menu mobile a scomparsa - Stato Aperto (classe is-open da JS) */
+    .nav-mobile-links.is-open {
+        transform: translateY(0); /* Porta dentro lo schermo */
         opacity: 1;
         visibility: visible; /* Rendi visibile */
-        pointer-events: auto;
-        z-index: 1000; /* Assicura che sia sopra gli altri contenuti */
+        pointer-events: auto; /* Abilita i click */
+        z-index: 1000; /* Porta sopra tutto il resto */
     }
 
     .nav-mobile-links li {
@@ -588,7 +562,6 @@ footer p {
     }
 }
 
-/* Media Query per Schermi Molto Piccoli (max-width: 600px) */
 @media (max-width: 600px) {
     .hero-small {
         height: 25vh;
