@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gestione del Menu Hamburger
     const menuToggle = document.querySelector('.menu-toggle');
-    // MODIFICA QUI: Ora selezioniamo la singola lista di navigazione unificata
+    // Ora selezioniamo la singola lista di navigazione unificata
     const navLinks = document.querySelector('.nav-links'); 
     const body = document.body; // Per impedire lo scroll del body
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
         root: null, // Si riferisce alla viewport come root
         rootMargin: '0px', // Nessun margine extra attorno alla root
-        threshold: 0.2 // L'elemento deve essere visibile per almeno il 20% per attivare l'osservatore
+        threshold: 0.8 // L'elemento deve essere visibile per almeno l'80% per attivare l'osservatore
     };
 
     const observerCallback = (entries, observer) => {
@@ -64,13 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 // L'elemento è entrato nella viewport
                 entry.target.classList.add('in-view');
-                // Se vuoi che l'animazione avvenga solo una volta, disconnetti l'observer per quell'elemento:
-                // observer.unobserve(entry.target);
-            } else {
-                // L'elemento è uscito dalla viewport
-                // Se vuoi che torni allo stato originale quando esce, aggiungi:
-                // entry.target.classList.remove('in-view');
-            }
+                // Disconnetti l'observer per questo elemento specifico dopo che è stato animato
+                // Questo fa sì che l'animazione avvenga solo una volta per elemento.
+                observer.unobserve(entry.target); 
+            } 
+            // Se volessi che l'animazione si ripeta ogni volta che esce ed entra dalla viewport, 
+            // potresti decommentare il blocco else seguente:
+            // else {
+            //     entry.target.classList.remove('in-view');
+            // }
         });
     };
 

@@ -222,12 +222,13 @@ body.no-scroll {
     border: 1px solid rgba(0, 255, 255, 0.2); /* Bordo azzurrino di default */
 }
 
-/* NUOVA CLASSE per l'effetto "quando in viewport" (Viola) */
+/* MODIFICA QUI: Aggiungiamo un transition-delay per il cambio di colore e un effetto di sollevamento più deciso */
 .program-item.in-view, .item-list.in-view {
     background-color: rgba(255, 0, 255, 0.05); /* Sfondo leggermente viola trasparente */
     box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5); /* Ombra viola */
     border-color: rgba(255, 0, 255, 0.4); /* Bordo viola */
-    transform: translateY(-5px); /* Mantieni l'effetto di sollevamento se ti piace */
+    transform: translateY(-8px); /* Sollevamento più pronunciato */
+    transition-delay: 0.1s; /* NUOVO: Piccolo ritardo nell'inizio della transizione */
 }
 
 /* Modifica dell'hover per mantenere un'interazione, ma diversa dall'in-view */
