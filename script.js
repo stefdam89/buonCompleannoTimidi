@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // NUOVO: Gestione Hamburger Menu (inserisci questa parte qui sotto il countdown)
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
+   const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-mobile-links'); // MODIFICATO QUI: da .nav-links a .nav-mobile-links
+  
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('is-open');

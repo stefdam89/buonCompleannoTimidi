@@ -35,7 +35,7 @@ body {
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
 }
 
-/* Impedisce lo scroll del body quando il menu è aperto (aggiunto per mobile menu) */
+/* Impedisce lo scroll del body quando il menu è aperto */
 body.no-scroll {
     overflow: hidden;
 }
@@ -83,7 +83,7 @@ body.no-scroll {
 .hero h1 {
     font-family: var(--font-heading);
     font-size: 5em;
-    margin-bottom: 30px; /* Esempio: aumentato a 30px */
+    margin-bottom: 30px;
     color: var(--primary-color);
     text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
 }
@@ -320,18 +320,19 @@ footer p {
     text-shadow: 0 0 15px var(--secondary-color), 0 0 30px var(--secondary-color);
 }
 
-.navbar .nav-links {
+/* Stili per i link desktop (sempre visibili su desktop) */
+.nav-desktop-links {
     list-style: none;
-    display: flex; /* Display flex per desktop */
+    display: flex; /* Visibile su desktop */
     margin: 0;
     padding: 0;
 }
 
-.navbar .nav-links li {
+.nav-desktop-links li {
     margin-left: 30px;
 }
 
-.navbar .nav-links a {
+.nav-desktop-links a {
     color: var(--text-on-dark);
     text-decoration: none;
     font-weight: 600;
@@ -340,7 +341,7 @@ footer p {
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.navbar .nav-links a::after {
+.nav-desktop-links a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -351,16 +352,62 @@ footer p {
     transition: width 0.3s ease;
 }
 
-.navbar .nav-links a:hover {
+.nav-desktop-links a:hover {
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color);
 }
 
-.navbar .nav-links a:hover::after {
+.nav-desktop-links a:hover::after {
     width: 100%;
 }
 
-/* Stili specifici per i titoli delle sezioni nel menu (solo mobile) */
+/* Stili per il menu mobile (nascosto di default) */
+.nav-mobile-links {
+    list-style: none;
+    display: none; /* Nascosto su desktop, mostrato da JS su mobile */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-mobile-links li {
+    /* Questi stili saranno sovrascritti dalle media query per mobile */
+    margin: 0; /* Resetta i margini desktop */
+}
+
+.nav-mobile-links a {
+    /* Questi stili saranno sovrascritti dalle media query per mobile */
+    color: var(--text-on-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-mobile-links a::after {
+    /* Questi stili saranno sovrascritti dalle media query per mobile */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-mobile-links a:hover {
+    /* Questi stili saranno sovrascritti dalle media query per mobile */
+    color: var(--secondary-color);
+    text-shadow: 0 0 8px var(--secondary-color);
+}
+
+.nav-mobile-links a:hover::after {
+    /* Questi stili saranno sovrascritti dalle media query per mobile */
+    width: 100%;
+}
+
+/* Stili specifici per i titoli delle sezioni nel menu mobile */
 .menu-section-title {
     font-family: var(--font-heading);
     color: var(--accent-color);
@@ -370,11 +417,11 @@ footer p {
     margin-bottom: 10px;
     letter-spacing: 1px;
     font-weight: 700;
-    padding-left: 10px; /* Indenta leggermente i titoli */
+    padding-left: 10px;
     display: none; /* Nascosto di default su desktop */
 }
 
-/* Stili per il separatore nel menu (solo mobile) */
+/* Stili per il separatore nel menu mobile */
 .menu-separator {
     width: 80%;
     height: 1px;
@@ -382,7 +429,6 @@ footer p {
     margin: 20px auto;
     display: none; /* Nascosto di default su desktop */
 }
-
 
 /* Hamburger Menu Styles */
 .menu-toggle {
@@ -459,12 +505,19 @@ footer p {
         align-items: center;
     }
 
-    .menu-toggle {
-        display: block; /* Mostra l'hamburger su mobile */
+    /* Nascondi i link desktop su mobile */
+    .nav-desktop-links {
+        display: none;
     }
 
-    .navbar .nav-links {
-        display: none; /* Nascondi il menu di default */
+    /* Mostra l'hamburger su mobile */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Stili del menu mobile a scomparsa */
+    .nav-mobile-links {
+        display: none; /* Nascosto di default, mostrato da JS */
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -475,6 +528,7 @@ footer p {
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         height: auto; /* Adatta l'altezza al contenuto */
+        max-height: calc(100vh - 70px); /* Limita altezza per non uscire dallo schermo (70px è approx altezza navbar) */
         overflow-y: auto; /* Abilita lo scroll se il menu è troppo lungo */
         transform: translateY(-100%); /* Nascondi fuori dallo schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease; /* Animazione slide */
@@ -482,31 +536,31 @@ footer p {
         pointer-events: none; /* Non intercettare eventi quando nascosto */
     }
 
-    .navbar .nav-links.is-open { /* Classe aggiunta da JS per mostrare il menu */
+    .nav-mobile-links.is-open { /* Classe aggiunta da JS per mostrare il menu */
         display: flex;
         transform: translateY(0); /* Fai scorrere dentro lo schermo */
         opacity: 1; /* Rendi visibile */
         pointer-events: auto; /* Intercetta gli eventi */
     }
 
-    .navbar .nav-links li {
+    .nav-mobile-links li {
         margin: 10px 0; /* Riduci il margine per mobile */
         text-align: center;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separatore tra voci */
     }
 
-    .navbar .nav-links li:last-child {
+    .nav-mobile-links li:last-child {
         border-bottom: none; /* Rimuovi bordo dall'ultima voce del menu */
     }
 
-    .navbar .nav-links a {
+    .nav-mobile-links a {
         font-size: 1.2em; /* Rendi i link più grandi su mobile */
         padding: 10px 0;
         display: block; /* Rendi l'intera area del link cliccabile */
     }
 
-    .navbar .nav-links a::after {
+    .nav-mobile-links a::after {
         bottom: -2px; /* Aggiusta posizione sottolineatura */
     }
 
