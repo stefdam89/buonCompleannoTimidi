@@ -27,24 +27,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // Gestione del Menu Hamburger
+    // Gestione del Menu Hamburger (RIPRISTINATO COMPORTAMENTO SEPARATO)
     const menuToggle = document.querySelector('.menu-toggle');
-    // Ora selezioniamo la singola lista di navigazione unificata
-    const navLinks = document.querySelector('.nav-links'); 
+    // Seleziona la lista di navigazione MOBILE (NON quella unificata)
+    const navMobileLinks = document.querySelector('.nav-mobile-links'); 
     const body = document.body; // Per impedire lo scroll del body
 
-    if (menuToggle && navLinks) {
+    if (menuToggle && navMobileLinks) { // Controlla che entrambi gli elementi esistano
         menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('is-open');
+            navMobileLinks.classList.toggle('is-open');
             this.classList.toggle('is-active'); // Per animare l'hamburger a X
             body.classList.toggle('no-scroll'); // Blocca lo scroll del body
         });
 
         // Chiudi il menu quando un link viene cliccato (su mobile)
-        navLinks.querySelectorAll('a').forEach(link => {
+        navMobileLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                if (navLinks.classList.contains('is-open')) {
-                    navLinks.classList.remove('is-open');
+                if (navMobileLinks.classList.contains('is-open')) {
+                    navMobileLinks.classList.remove('is-open');
                     menuToggle.classList.remove('is-active');
                     body.classList.remove('no-scroll');
                 }
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // NUOVO CODICE: Animazione all'ingresso per i box (program-item, item-list)
+    // Animazione all'ingresso per i box (program-item, item-list)
     const observerOptions = {
         root: null, // Si riferisce alla viewport come root
         rootMargin: '0px', // Nessun margine extra attorno alla root
@@ -68,11 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Questo fa sì che l'animazione avvenga solo una volta per elemento.
                 observer.unobserve(entry.target); 
             } 
-            // Se volessi che l'animazione si ripeta ogni volta che esce ed entra dalla viewport, 
-            // potresti decommentare il blocco else seguente:
-            // else {
-            //     entry.target.classList.remove('in-view');
-            // }
         });
     };
 
