@@ -61,6 +61,7 @@ body.no-scroll {
     padding: 20px;
     border-bottom: 2px solid var(--primary-color);
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
+    z-index: 10; /* Assicura che l'hero non stia sopra elementi importanti */
 }
 
 .hero::before { /* Overlay scuro per l'header */
@@ -151,6 +152,8 @@ body.no-scroll {
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
     scroll-margin-top: 100px;
+    z-index: 5; /* Assicurati che le sezioni non stiano sopra il menu */
+    position: relative; /* Necessario per z-index */
 }
 
 .section h2 {
@@ -269,6 +272,8 @@ footer {
     margin-top: 40px;
     box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
     scroll-margin-top: 100px;
+    z-index: 5; /* Assicurati che il footer non stia sopra il menu */
+    position: relative; /* Necessario per z-index */
 }
 
 footer p {
@@ -290,7 +295,7 @@ footer p {
     padding: 15px 0;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1000; /* La navbar è la base superiore */
     border-bottom: 2px solid var(--primary-color);
     box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
 }
@@ -306,7 +311,7 @@ footer p {
     font-family: var(--font-heading);
     font-size: 2em;
     font-weight: 700;
-    z-index: 1001; /* Il logo deve essere sopra tutto */
+    z-index: 1001; /* Il logo deve essere sopra tutto, anche il menu quando chiuso */
 }
 
 .navbar .logo a {
@@ -323,7 +328,7 @@ footer p {
 /* Link desktop (visibili solo su desktop) */
 .nav-desktop-links {
     list-style: none;
-    display: flex; /* Visibile su desktop per impostazione predefinita */
+    display: flex;
     margin: 0;
     padding: 0;
 }
@@ -382,7 +387,7 @@ footer p {
     cursor: pointer;
     padding: 10px;
     position: relative;
-    z-index: 1002; /* Sempre sopra il menu */
+    z-index: 1002; /* Sempre sopra il logo e il menu quando chiuso */
 }
 
 .hamburger {
@@ -456,31 +461,30 @@ footer p {
         display: flex; /* Forziamo display flex per consistenza */
         flex-direction: column;
         width: 100%;
-        position: absolute;
-        top: 100%; /* Inizia sotto la navbar */
+        position: fixed; /* CAMBIATO DA ABSOLUTE A FIXED */
+        top: 70px; /* Altezza della navbar, così appare sotto di essa */
         left: 0;
         background-color: rgba(0, 0, 0, 0.98);
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         height: auto;
-        max-height: calc(100vh - 70px);
+        max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
         overflow-y: auto;
         transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
-        opacity: 0 !important; /* Forza opacità a 0 quando chiuso */
-        visibility: hidden !important; /* Forza visibilità nascosta quando chiuso */
-        pointer-events: none; /* Non intercettare click quando nascosto */
-        z-index: 999; /* Sotto logo/hamburger, ma sopra il contenuto della pagina */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none;
+        z-index: 1005 !important; /* NUOVO Z-INDEX ALTISSIMO PER IL MENU APERTO */
     }
 
     /* Menu mobile a scomparsa - Stato Aperto (classe is-open da JS) */
     .nav-mobile-links.is-open {
-        transform: translateY(0) !important; /* Porta dentro lo schermo, forza! */
-        opacity: 1 !important; /* Rendi visibile, forza! */
-        visibility: visible !important; /* Rendi visibile, forza! */
-        pointer-events: auto; /* Abilita i click */
-        z-index: 1000 !important; /* Porta sopra tutto il resto, forza! */
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto;
     }
 
     .nav-mobile-links li {
@@ -498,7 +502,7 @@ footer p {
         font-size: 1.2em;
         padding: 10px 0;
         display: block;
-        color: var(--text-on-dark); /* Assicura che il testo sia visibile */
+        color: var(--text-on-dark);
     }
 
     .nav-mobile-links a::after {
