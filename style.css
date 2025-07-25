@@ -6,9 +6,9 @@
     --primary-color: #00FFFF; /* Ciano brillante (Aqua/Electric Blue) */
     --secondary-color: #FF00FF; /* Magenta elettrico (Fuchsia) */
     --accent-color: #FFFF00; /* Giallo fluo (Neon Yellow) - per accenti minori */
-    --section-solid-bg: rgba(0, 0, 0, 0.9); /* MODIFICATO: Leggermente più trasparente */
+    --section-solid-bg: rgba(0, 0, 0, 0.9); /* Leggermente più trasparente */
     --hero-overlay-opacity: 0.5; /* Opacità per l'overlay dell'hero */
-    --card-bg-transparent-light: rgba(255, 255, 255, 0.005); /* MODIFICATO: Estremamente trasparente */
+    --card-bg-transparent-light: rgba(255, 255, 255, 0.005); /* Estremamente trasparente */
     --text-on-dark: #FFFFFF; /* Testo bianco puro su sfondi scuri */
     --heading-on-dark: var(--secondary-color); /* Titoli Magenta su sfondi scuri */
     --font-heading: 'Montserrat', sans-serif;
@@ -48,7 +48,7 @@ body.no-scroll {
     padding: 0 20px;
 }
 
-/* Header / Hero Section - La prima banda a tutta larghezza (trasparente) */
+/* Header / Hero Section */
 .hero {
     color: var(--text-on-dark);
     height: 70vh;
@@ -63,7 +63,7 @@ body.no-scroll {
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
 }
 
-.hero::before { /* Overlay scuro per l'header (la banda scura trasparente) */
+.hero::before { /* Overlay scuro per l'header */
     content: '';
     position: absolute;
     top: 0;
@@ -140,7 +140,7 @@ body.no-scroll {
     padding: 12px 25px;
 }
 
-/* Sezioni Generali - Bande a tutta larghezza con sfondo quasi solido */
+/* Sezioni Generali */
 .section {
     padding: 80px 0;
     text-align: center;
@@ -150,7 +150,7 @@ body.no-scroll {
     margin-bottom: 40px;
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-    scroll-margin-top: 100px; /* Per far vedere il titolo sotto la navbar sticky */
+    scroll-margin-top: 100px;
 }
 
 .section h2 {
@@ -185,7 +185,7 @@ body.no-scroll {
     color: var(--text-on-dark);
 }
 
-/* Griglie per Programma e Cosa Portare - Card interne con sfondo molto trasparente */
+/* Griglie per Programma e Cosa Portare */
 .grid-2-cols {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -209,7 +209,7 @@ body.no-scroll {
 }
 
 .program-item, .item-list {
-    background-color: var(--card-bg-transparent-light); /* Sfondo delle card: estremamente trasparente */
+    background-color: var(--card-bg-transparent-light);
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -258,7 +258,7 @@ body.no-scroll {
     text-align: center;
 }
 
-/* Footer - Quasi solido con bordi fluo */
+/* Footer */
 footer {
     background-color: rgba(0, 0, 0, 0.95);
     color: var(--text-on-dark);
@@ -268,7 +268,7 @@ footer {
     border-top: 5px solid var(--secondary-color);
     margin-top: 40px;
     box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-    scroll-margin-top: 100px; /* Per far vedere il titolo sotto la navbar sticky */
+    scroll-margin-top: 100px;
 }
 
 footer p {
@@ -277,7 +277,7 @@ footer p {
 
 /* Stile per Header di pagine interne (più corto) */
 .hero-small {
-    height: 40vh; /* O un valore in pixel, es. 300px */
+    height: 40vh;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -299,14 +299,14 @@ footer p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* Per posizionare il menu-toggle */
+    position: relative;
 }
 
 .navbar .logo {
     font-family: var(--font-heading);
     font-size: 2em;
     font-weight: 700;
-    z-index: 1001; /* Assicura che il logo sia sopra il menu quando è aperto */
+    z-index: 1001;
 }
 
 .navbar .logo a {
@@ -361,50 +361,12 @@ footer p {
     width: 100%;
 }
 
-/* Stili per il menu mobile (nascosto di default) */
+/* Stili per il menu mobile (nascosto di default su desktop) */
 .nav-mobile-links {
     list-style: none;
     display: none; /* Nascosto su desktop, mostrato da JS su mobile */
     margin: 0;
     padding: 0;
-}
-
-.nav-mobile-links li {
-    /* Questi stili saranno sovrascritti dalle media query per mobile */
-    margin: 0; /* Resetta i margini desktop */
-}
-
-.nav-mobile-links a {
-    /* Questi stili saranno sovrascritti dalle media query per mobile */
-    color: var(--text-on-dark);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1em;
-    position: relative;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.nav-mobile-links a::after {
-    /* Questi stili saranno sovrascritti dalle media query per mobile */
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 3px;
-    background-color: var(--secondary-color);
-    transition: width 0.3s ease;
-}
-
-.nav-mobile-links a:hover {
-    /* Questi stili saranno sovrascritti dalle media query per mobile */
-    color: var(--secondary-color);
-    text-shadow: 0 0 8px var(--secondary-color);
-}
-
-.nav-mobile-links a:hover::after {
-    /* Questi stili saranno sovrascritti dalle media query per mobile */
-    width: 100%;
 }
 
 /* Stili specifici per i titoli delle sezioni nel menu mobile */
@@ -438,7 +400,7 @@ footer p {
     cursor: pointer;
     padding: 10px;
     position: relative;
-    z-index: 1002; /* Sopra la navbar e il logo quando aperto */
+    z-index: 1002;
 }
 
 .hamburger {
@@ -496,7 +458,7 @@ footer p {
 /* MEDIA QUERIES FINALI (RIORGANIZZATE E AGGIORNATE) */
 /* ---------------------------------------------------------------------- */
 
-/* Media Queries per la Responsività Generale */
+/* Media Query per Schermi Intermedi e Mobile (max-width: 900px) */
 @media (max-width: 900px) {
     /* Navbar per Mobile (hamburger menu) */
     .navbar .container {
@@ -517,7 +479,7 @@ footer p {
 
     /* Stili del menu mobile a scomparsa */
     .nav-mobile-links {
-        display: none; /* Nascosto di default, mostrato da JS */
+        display: none; /* Nascosto di default */
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -527,7 +489,7 @@ footer p {
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
-        height: auto; /* Adatta l'altezza al contenuto */
+        height: auto;
         max-height: calc(100vh - 70px); /* Limita altezza per non uscire dallo schermo (70px è approx altezza navbar) */
         overflow-y: auto; /* Abilita lo scroll se il menu è troppo lungo */
         transform: translateY(-100%); /* Nascondi fuori dallo schermo */
@@ -544,7 +506,7 @@ footer p {
     }
 
     .nav-mobile-links li {
-        margin: 10px 0; /* Riduci il margine per mobile */
+        margin: 10px 0;
         text-align: center;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separatore tra voci */
@@ -555,13 +517,13 @@ footer p {
     }
 
     .nav-mobile-links a {
-        font-size: 1.2em; /* Rendi i link più grandi su mobile */
+        font-size: 1.2em;
         padding: 10px 0;
-        display: block; /* Rendi l'intera area del link cliccabile */
+        display: block;
     }
 
     .nav-mobile-links a::after {
-        bottom: -2px; /* Aggiusta posizione sottolineatura */
+        bottom: -2px;
     }
 
     /* Mostra i titoli e i separatori su mobile */
@@ -569,25 +531,25 @@ footer p {
         display: block;
         margin-top: 25px;
         margin-bottom: 15px;
-        font-size: 1.1em; /* Un po' più grande per i titoli di sezione */
-        padding-left: 0; /* Centra il testo */
+        font-size: 1.1em;
+        padding-left: 0;
         text-align: center;
     }
 
     .menu-separator {
         display: block;
         width: 60%;
-        background-color: rgba(255, 0, 255, 0.3); /* Colore fluo per il separatore mobile */
+        background-color: rgba(255, 0, 255, 0.3);
         box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-        margin: 20px auto; /* Centra il separatore */
+        margin: 20px auto;
     }
 
     /* Regolazioni Hero per Pagine Interne (hero-small) */
     .hero-small {
-        height: 30vh; /* Ancora più corto su schermi intermedi */
+        height: 30vh;
     }
     .hero-small .hero-content {
-        padding-top: 100px; /* Spingi giù il contenuto per navbar fissa */
+        padding-top: 100px;
     }
     
     /* Ridimensionamenti generali per schermi intermedi */
@@ -611,7 +573,7 @@ footer p {
         font-size: 1.1em;
     }
     .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr; /* Impila le colonne su schermi più piccoli */
+        grid-template-columns: 1fr;
         max-width: none;
         margin-left: 20px;
         margin-right: 20px;
@@ -622,16 +584,15 @@ footer p {
     }
 }
 
+/* Media Query per Schermi Molto Piccoli (max-width: 600px) */
 @media (max-width: 600px) {
-    /* Regolazioni Hero per Pagine Interne (hero-small) */
     .hero-small {
-        height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
+        height: 25vh;
     }
     .hero-small .hero-content {
-        padding-top: 80px; /* Riduci ulteriormente il padding */
+        padding-top: 80px;
     }
 
-    /* Ridimensionamenti generali per schermi molto piccoli */
     .hero h1 {
         font-size: 1.8em;
     }
@@ -659,14 +620,13 @@ footer p {
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
     }
-    /* Menu mobile specifico per 600px */
     .menu-section-title {
         font-size: 1em;
         margin-top: 20px;
         margin-bottom: 10px;
     }
     .menu-separator {
-        width: 50%; /* Separatore leggermente più piccolo */
+        width: 50%;
         margin: 15px auto;
     }
 }

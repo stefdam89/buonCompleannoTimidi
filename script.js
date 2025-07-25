@@ -1,8 +1,5 @@
-// Questo è il punto di inizio del tuo script, dovrebbe esserci già.
 document.addEventListener('DOMContentLoaded', function() {
-    // QUI DENTRO CI VA TUTTO IL TUO CODICE JS
-
-    // Gestione del Countdown (questo dovrebbe essere il tuo codice esistente)
+    // Gestione del Countdown
     const countdownElement = document.getElementById('countdown');
     const targetDate = new Date('2025-08-08T16:00:00').getTime(); 
 
@@ -29,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // NUOVO: Gestione Hamburger Menu (inserisci questa parte qui sotto il countdown)
-   const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-mobile-links'); // MODIFICATO QUI: da .nav-links a .nav-mobile-links
-  
+    // Gestione Hamburger Menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-mobile-links'); // *** QUESTA RIGA È FONDAMENTALE ***
+
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('is-open');
@@ -48,6 +45,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
-    // FINE DI TUTTO IL TUO CODICE JS
-}); // Questa parentesi graffa chiude la function di DOMContentLoaded
+});
