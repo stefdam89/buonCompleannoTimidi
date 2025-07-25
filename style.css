@@ -91,7 +91,7 @@ body.no-scroll {
 
 .hero .subtitle {
     font-size: 2.5em;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Margine di default per l'hero principale */
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color);
     font-weight: 600;
@@ -147,7 +147,7 @@ body.no-scroll {
     text-align: center;
     background-color: var(--section-solid-bg);
     color: var(--text-on-dark);
-    margin-top: 40px;
+    margin-top: 40px; /* Riportato al valore originale, come richiesto */
     margin-bottom: 40px;
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
@@ -155,6 +155,8 @@ body.no-scroll {
     z-index: 5; /* Assicurati che le sezioni non stiano sopra il menu */
     position: relative; /* Necessario per z-index */
 }
+
+/* RIMOSSA la regola .section.first-section-no-margin */
 
 .section h2 {
     font-family: var(--font-heading);
@@ -186,11 +188,6 @@ body.no-scroll {
     margin-left: auto;
     margin-right: auto;
     color: var(--text-on-dark);
-}
-
-/* Stili per la prima sezione delle pagine interne senza margine superiore */
-.section.first-section-no-margin {
-    margin-top: 0;
 }
 
 /* Griglie per Programma e Cosa Portare */
@@ -289,6 +286,17 @@ footer p {
 .hero-small {
     height: 40vh;
 }
+
+/* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
+/* Questa regola risolve l'accavallamento su mobile */
+.hero.hero-small .subtitle {
+    margin-bottom: 40px; /* Aumenta questo valore per più spazio dal basso */
+}
+.hero.hero-small .hero-content {
+    padding-top: 100px; /* Mantiene il padding superiore */
+    padding-bottom: 40px; /* Aggiunge spazio sotto il contenuto per evitare accavallamenti */
+}
+
 
 /* ---------------------------------------------------------------------- */
 /* NAVBAR E HAMBURGER MENU */
@@ -560,12 +568,13 @@ footer p {
 
     /* Regolazioni Hero per Pagine Interne (hero-small) */
     .hero-small {
-        height: 30vh;
+        height: 30vh; /* Ridotto ulteriormente per mobile, se necessario */
     }
     .hero-small .hero-content {
-        padding-top: 100px;
+        padding-top: 80px; /* Regolato il padding superiore per allineamento */
+        padding-bottom: 30px; /* Spazio aggiuntivo sotto il contenuto per mobile */
     }
-    
+
     /* Ridimensionamenti generali per schermi intermedi */
     .hero h1 {
         font-size: 2.8em;
@@ -600,10 +609,11 @@ footer p {
 
 @media (max-width: 600px) {
     .hero-small {
-        height: 25vh;
+        height: 25vh; /* Ulteriore riduzione per schermi molto piccoli */
     }
     .hero-small .hero-content {
-        padding-top: 80px;
+        padding-top: 60px; /* Adattamento del padding superiore per schermi molto piccoli */
+        padding-bottom: 25px; /* Ulteriore aggiustamento del padding inferiore */
     }
 
     .hero h1 {
