@@ -358,11 +358,138 @@ body.no-scroll {
     color: var(--text-on-dark);
 }
 
-.program-item ul li::before, .item-list ul li::before {
-    content: '⚡ ';
+/* Rimuoviamo il fulmine generico per item-list ul li::before */
+.program-item ul li::before {
+    content: '⚡ '; /* Manteniamo il fulmine per i program-item */
     color: var(--accent-color);
     margin-right: 8px;
     font-size: 1.3em;
+}
+
+/* Reset generale per le icone delle liste in .item-list */
+.item-list ul li::before {
+    content: ''; /* Resettiamo il contenuto a vuoto di default per item-list */
+    color: var(--accent-color); /* Colore base del neon */
+    margin-right: 8px;
+    font-size: 1.3em;
+    /* Aggiungi qui altre proprietà comuni se le desideri, ad esempio text-shadow */
+}
+
+
+/* Rimuove l'icona del fulmine da specifiche liste, ma ora è quasi ridondante per item-list */
+/* Manteniamo questa regola per program-item o per uso futuro su altri div.item-list */
+.no-lightning-icon ul li::before {
+    content: none; /* Non mostrare alcun contenuto */
+    margin-right: 0; /* Rimuovi il margine se presente */
+}
+
+/* NUOVI STILI SPECIFICI PER LE ICONE DELLE LISTE 'COSA PORTARE' */
+
+/* Stili per le icone del programma giornaliero */
+
+
+.program-item.welcome::before {
+    content: '👯 '; /* 🛎️ Campanello della reception */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.bbq::before {
+    content: '🥩'; /* 🍖 Pezzo di carne con osso */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.karaoke::before {
+    content: '\1F3A4 '; /* 🎤 Microfono */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.exhibition::before {
+    content: '\1F3AD '; /* 🎭 Maschere da teatro */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.breakfast::before {
+    content: '🥐 '; /* 🍳 Uovo in padella */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.walk::before {
+    content: '\1F6B6\200D\2642\FE0F '; /* 🚶‍♂️ Uomo che cammina */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.lunch::before {
+    content: '\1F37D\FE0F '; /* 🍽️ Forchetta e coltello con piatto */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.relax-games::before {
+    content: '🏐 '; /* 🏐 Dado da gioco (puoi metterli entrambi o uno solo) */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.dinner::before {
+    content: '\1F374 '; /* 🍴 Forchetta e coltello */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.program-item.rave::before {
+    content: '🥳'; /* 🎉 Party popper */
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+/* Abbigliamento in montagna */
+.item-list .icon-shoes::before {
+    content: '\1F45F '; /* 👟 Scarpa da ginnastica */
+}
+
+.item-list .icon-sweater::before {
+    content: '\1F9E5 '; /* 🧶 Gomitolo di lana */
+}
+
+.item-list .icon-jacket::before {
+    content: '🥼'; /* 🧥 Cappotto */
+}
+
+/* Per sopravvivere */
+.item-list .icon-sleepingbag::before {
+    content: '\1F3D5 '; /* 🛌 Persona a letto */
+}
+
+.item-list .icon-flashlight::before {
+    content: '\1F526 '; /* 🔦 Torcia */
+}
+
+.item-list .icon-sunscreen::before {
+    content: '\2600\FE0F '; /* ☀️ Sole (con variation selector per emoji) o 🏖️ Spiaggia con ombrellone \1F3D6 */
+    /* Ho preferito il sole diretto che è più chiaro come concetto di protezione solare */
+}
+
+/* Extra & Divertimento */
+.item-list .icon-boardgames::before {
+    content: '\1F3B2 '; /* 🎲 Dado da gioco */
+}
+
+.item-list .icon-music::before {
+    content: '\1F3B5 '; /* 🎶 Nota musicale */
+}
+
+.item-list .icon-mat::before {
+    content: '🧘 '; /* 🛽 Materasso/Cuscino per comodità o \1F3D5 per tenda */
+    /* Ho scelto un'emoji più simile a un tappetino per meditazione/campeggio */
+}
+
+/* Puoi aggiungere un text-shadow comune a tutte queste nuove icone se vuoi */
+.item-list .icon-shoes::before,
+.item-list .icon-sweater::before,
+.item-list .icon-jacket::before,
+.item-list .icon-sleepingbag::before,
+.item-list .icon-flashlight::before,
+.item-list .icon-sunscreen::before,
+.item-list .icon-boardgames::before,
+.item-list .icon-music::before,
+.item-list .icon-mat::before {
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
 }
 
 /* Allineamento testo specifico */
@@ -938,11 +1065,5 @@ footer p {
         padding: 10px 20px;
         font-size: 0.9em;
     }
-    .btn-large {
-        font-size: 1.2em;
-        padding: 15px 30px;
-    }
-    .program-item h3, .item-list h3 {
-        font-size: 1.6em;
-    }
+    /* Resto delle media queries per schermi più piccoli */
 }
