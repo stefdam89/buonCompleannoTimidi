@@ -260,9 +260,9 @@ body.no-scroll {
 }
 
 /* Classe che si attiva quando l'elemento è visibile (aggiunta via JS) */
-.program-item.in-view, .item-list li.in-view { /* CAMBIATO DA .is-visible A .in-view */
+.program-item.is-visible, .item-list li.is-visible {
     color: var(--accent-color); 
-    text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.5); 
+    text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(var(--accent-color-rgb), 0.5); 
 }
 
 
@@ -937,9 +937,8 @@ footer p {
         color: var(--text-on-dark);
         text-decoration: none;
         position: relative;
-        /* Preparazione per l'effetto sottolinea e evidenzia */
-        border-bottom: 2px solid transparent; /* Linea trasparente di base */
-        transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease, border-bottom 0.3s ease;
+        transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Bordo sottile per separare */
         box-shadow: 0 0 5px rgba(0, 255, 255, 0.05); /* Leggera ombra di base */
     }
 
@@ -947,152 +946,137 @@ footer p {
         border-bottom: none;
     }
 
-    /* REGOLA AGGIUNTA/MODIFICATA: Rimuove il bordo dalla voce "Contatti" su feedback.html */
-    /* Questa regola sovrascrive il bordo solo per la pagina feedback.html se la classe 'mobile-menu-contacts-item' è applicata lì */
-    /* Se la classe 'mobile-menu-contacts-item' viene completamente rimossa dall'HTML di feedback.html, questa regola non sarà necessaria. */
-    /* Per maggiore sicurezza, la targettiamo solo se non è la pagina home */
-    .feedback-page .nav-mobile-links .mobile-menu-contacts-item {
-        border-top: none !important;
-        padding-top: 0 !important;
-        margin-top: 0 !important;
+    /* QUESTA SEZIONE TORNA COME ERA PRIMA, NESSUNA is-tapped QUI */
+    .nav-mobile-links a:hover,
+    .nav-mobile-links a:focus {
+        color: var(--accent-color); /* Cambia colore del testo a giallo fluo */
+        background-color: rgba(255, 0, 255, 0.1); /* Sfondo leggermente magenta trasparente */
+        text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.4); /* Effetto neon al testo */
+        box-shadow: 0 0 15px var(--accent-color), 0 0 30px rgba(255, 255, 0, 0.3); /* Ombra neon più intensa */
+        transform: scale(1.01); /* Leggero ingrandimento */
     }
 
-    /* REGOLA AGGIUNTA/MODIFICATA: Effetto hover/focus/active per le voci del menu mobile, ESCLUSA la prima (che è il logo/home) */
-    .nav-mobile-links a:not(:first-child):hover,
-    .nav-mobile-links a:not(:first-child):focus,
-    .nav-mobile-links a:not(:first-child):active {
-        color: var(--secondary-color); /* Cambia colore del testo in magenta */
-        text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color); /* Effetto neon più intenso */
-        border-bottom: 2px solid var(--secondary-color); /* Appare la linea magenta sotto */
-        background-color: rgba(255, 0, 255, 0.1); /* Leggero sfondo viola trasparente */
+    /* Rimuovi la riga orizzontale sotto il link che avevamo in a::after, non serve più */
+    .nav-mobile-links a::after {
+        content: none; /* Elimina la riga sotto il link */
+    }
+    /* FINE MODIFICHE QUI PER MIGLIORARE L'ASPETTO DEI LINK MOBILE */
+
+
+    /* MODIFICHE QUI PER MIGLIORARE L'ASPETTO DEI TITOLI DI SEZIONE MOBILE */
+    .menu-section-title {
+        display: block;
+        font-family: var(--font-heading); /* Usa il font dei titoli */
+        font-size: 1.4em; /* Leggermente più grandi */
+        font-weight: 700; /* Più in grassetto */
+        color: var(--primary-color); /* Colore ciano brillante */
+        text-align: center;
+        padding: 15px 0 10px; /* Padding sopra e sotto */
+        margin-top: 35px; /* Più spazio sopra */
+        margin-bottom: 20px; /* Più spazio sotto */
+        text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); /* Effetto neon */
+        border-bottom: 2px solid var(--primary-color); /* Linea di separazione */
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Ombra leggera */
     }
 
-    /* Se la tua voce "Timidi Arroganti" ha un ID specifico nel menu mobile (es. id="mobile-home-link"), usa questo: */
-    /* .nav-mobile-links a:not(#mobile-home-link):hover, */
-    /* .nav-mobile-links a:not(#mobile-home-link):focus, */
-    /* .nav-mobile-links a:not(#mobile-home-link):active { */
-    /* color: var(--secondary-color); */
-    /* text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color); */
-    /* border-bottom: 2px solid var(--secondary-color); */
-    /* background-color: rgba(255, 0, 255, 0.1); */
-    /* } */
-
-    /* La regola .nav-mobile-links a:hover, .nav-mobile-links a:focus vecchia è stata rimossa qui */
-    /* perché l'ho sostituita con quella :not(:first-child) sopra per l'effetto desiderato. */
+    .menu-section-title:first-of-type { /* Rimuovi il margine superiore per il primo titolo */
+        margin-top: 0;
+    }
+    /* FINE MODIFICHE QUI PER MIGLIORARE L'ASPETTO DEI TITOLI DI SEZIONE MOBILE */
 
 
-    /* Regolazioni per il titolo hero su schermi piccoli */
+    /* MODIFICHE QUI PER MIGLIORARE L'ASPETTO DEI SEPARATORI MOBILE */
+    .menu-separator {
+        display: block;
+        width: 100%; /* Leggermente più largo */
+        height: 3px; /* Più spesso */
+        background-color: var(--secondary-color); /* Colore magenta */
+        box-shadow: 0 0 15px var(--secondary-color), 0 0 25px rgba(255, 0, 255, 0.4); /* Effetto neon */
+        margin: 30px auto; /* Più spazio sopra e sotto */
+        border-radius: 2px; /* Angoli leggermente arrotondati */
+    }
+    /* FINE MODIFICHE QUI PER MIGLIORARE L'ASPETTO DEI SEPARATORI MOBILE */
+
+
+    /* Regolazioni Hero per Pagine Interne (hero-small) */
+    .hero-small {
+        height: 35vh; /* Leggermente aumentato l'altezza minima per mobile */
+        justify-content: center; /* Manteniamo la centratura del contenuto */
+    }
+    .hero.hero-small .subtitle {
+        margin-bottom: 60px; /* Mantieniamo il margine inferiore del sottotitolo */
+    }
+    .hero.hero-small .hero-content {
+        /* Aumenta il padding-top per spingere giù il contenuto e lascia padding-bottom */
+        /* OLD: padding-top: 90px; */
+        padding-top: 100px; /* Valore calibrato per assicurare visibilità su mobile */
+        padding-bottom: 50px; /* Mantieniamo un buon padding dal basso */
+    }
+
+    /* Ridimensionamenti generali per schermi intermedi */
     .hero h1 {
-        font-size: 3.2em; /* Dimensione adattata per mobile */
-        margin-bottom: 20px;
+        font-size: 2.8em;
     }
-
     .hero .subtitle {
-        font-size: 1.6em; /* Dimensione adattata per mobile */
-        margin-bottom: 20px;
+        font-size: 1.6em;
     }
-
     .countdown {
-        font-size: 2.2em; /* Dimensione adattata per mobile */
+        font-size: 2.8em;
+    }
+    .section {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .section h2 {
+        font-size: 2.8em;
         margin-bottom: 30px;
     }
-
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
     .btn-large {
         font-size: 1.2em;
         padding: 15px 30px;
     }
-
-    .section {
-        padding: 50px 0; /* Padding ridotto per le sezioni su mobile */
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .section h2 {
-        font-size: 2.5em; /* Dimensione ridotta per titoli di sezione */
-        margin-bottom: 30px;
-    }
-
-    .section h2::after {
-        width: 80px; /* Linea sotto il titolo più corta */
-        height: 4px;
-    }
-
-    .section p {
-        font-size: 1em; /* Paragrafi leggermente più piccoli */
-        margin-bottom: 20px;
-        padding: 0 10px; /* Aggiungi un po' di padding laterale per i paragrafi */
-    }
-
-    /* Dettagli evento (Quando/Dove) su mobile */
-    .event-details-wrapper {
-        gap: 15px; /* Spazio ridotto */
-        margin-top: 20px;
-        margin-bottom: 30px;
-    }
-
-    .detail-block {
-        max-width: none; /* Nessun limite di larghezza per il blocco su mobile */
-    }
-
-    .event-icon {
-        font-size: 2.8em; /* Icone leggermente più piccole */
-        margin-bottom: 5px;
-    }
-
-    .event-label {
-        font-size: 1.7em; /* Etichette più piccole */
-    }
-
-    .event-value {
-        font-size: 1.3em; /* Valori più piccoli */
-    }
-
-    /* Griglie per Programma e Cosa Portare su mobile (colonna singola) */
-    .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr; /* Una sola colonna */
-        gap: 30px; /* Spazio ridotto tra i blocchi */
-        margin-top: 20px;
-        padding: 0 15px; /* Padding per evitare che si attacchino ai bordi */
-    }
-
-    .program-item, .item-list {
-        padding: 20px; /* Padding ridotto per le card */
-    }
-
     .program-item h3, .item-list h3 {
-        font-size: 1.6em; /* Titoli card più piccoli */
-        margin-bottom: 15px;
+        font-size: 1.6em;
     }
+}
 
-    .program-item ul li, .item-list ul li {
-        font-size: 1em; /* Testo lista più piccolo */
-        margin-bottom: 10px;
-    }
-
-    .program-item ul li::before, .item-list ul li::before {
-        font-size: 1.1em; /* Icone lista più piccole */
-    }
-
-    /* Map container su mobile */
-    .map-container {
-        padding-bottom: 100%; /* Mappa quadrata su mobile (o adatta al tuo rapporto ideale) */
-        margin: 20px auto;
-    }
-
-    /* Regolazioni per hero-small su mobile */
+@media (max-width: 600px) {
     .hero-small {
-        height: 30vh; /* Altezza ancora più ridotta per mobile */
+        height: 30vh; /* Ulteriore aggiustamento per schermi molto piccoli */
+        justify-content: center; /* Manteniamo la centratura */
     }
-
+    .hero.hero-small .subtitle {
+        margin-bottom: 65px; /* Mantieniamo il margine inferiore */
+    }
     .hero.hero-small .hero-content {
-        padding-top: 80px; /* Regolato per mobile */
-        padding-bottom: 30px;
+        /* Aumenta ulteriormente il padding-top per schermi molto piccoli */
+        /* OLD: padding-top: 75px; */
+        padding-top: 85px; /* Valore calibrato per schermi molto piccoli */
+        padding-bottom: 40px; /* Mantieniamo il padding dal basso */
     }
-
-    /* Toast message su mobile */
-    .toast-message {
-        font-size: 1em; /* Dimensione testo toast ridotta */
-        padding: 12px 20px;
+    .hero h1 {
+        font-size: 1.8em;
     }
+    .hero .subtitle {
+        font-size: 1.2em;
+    }
+    .countdown {
+        font-size: 2.2em;
+    }
+    .section {
+        padding: 40px 0;
+    }
+    .section h2 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    /* Resto delle media queries per schermi più piccoli */
 }
