@@ -193,7 +193,7 @@ body.no-scroll {
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
     scroll-margin-top: 100px;
-    z-index: 5; /* Assicurati che le sezioni non stiano sopra il menu */
+    z-index: 5; /* Assicura che le sezioni non stiano sopra elementi importanti */
     position: relative; /* Necessario per z-index */
 }
 
@@ -610,6 +610,118 @@ footer p {
     height: 100%;
     border: 0; /* Rimuove il bordo predefinito dell'iframe */
 }
+
+/* *** INIZIO MODIFICHE PER IL FEEDBACK E TOAST *** */
+
+/* Rimuovi completamente o commenta il blocco .feedback-message - NON PIÙ USATO */
+/*
+.feedback-message {
+    background-color: rgba(255, 255, 0, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-shadow: 0 0 5px var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+*/
+
+/* La classe .hidden non è più necessaria per il messaggio di feedback se usi il toast - NON PIÙ USATA */
+/*
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+*/
+
+/* Stile per il pulsante di feedback disabilitato - MANTIENI QUESTO */
+.btn.disabled {
+    background: rgba(128, 128, 128, 0.5); /* Grigio semi-trasparente */
+    border-color: rgba(128, 128, 128, 0.5);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed; /* Cursore "non consentito" */
+    box-shadow: none;
+    pointer-events: none; /* Disabilita i click */
+    transform: none; /* Rimuovi eventuali trasformazioni di default */
+}
+
+.btn.disabled:hover { /* Nessun effetto hover per il pulsante disabilitato - MANTIENI QUESTO */
+    background: rgba(128, 128, 128, 0.5);
+    border-color: rgba(128, 128, 128, 0.5);
+    color: rgba(255, 255, 255, 0.6);
+    box-shadow: none;
+    transform: none;
+}
+
+/* Stile specifico per il link del menu mobile quando disabilitato - MANTIENI QUESTO (è per index.html) */
+#feedback-link-mobile.disabled {
+    color: rgba(255, 255, 255, 0.4) !important; /* Colore più sbiadito */
+    background-color: transparent !important; /* Nessun highlight */
+    text-shadow: none !important; /* Nessun effetto neon */
+    box-shadow: none !important; /* Nessuna ombra */
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#feedback-link-mobile.disabled:hover,
+#feedback-link-mobile.disabled:focus {
+    color: rgba(255, 255, 255, 0.4) !important;
+    background-color: transparent !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* NUOVI STILI PER IL MESSAGGIO TOAST/POPUP */
+.toast-message {
+    position: fixed; /* Rimane fisso nello schermo */
+    bottom: 20px; /* 20px dal fondo */
+    left: 50%; /* Centrato orizzontalmente */
+    transform: translateX(-50%) translateY(100px); /* Inizia nascosto sotto e traslato al centro */
+    background-color: rgba(0, 0, 0, 0.9); /* Sfondo scuro e semi-trasparente */
+    color: var(--accent-color); /* Testo giallo fluo */
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.6), 0 0 25px rgba(255, 255, 0, 0.3); /* Effetto neon */
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    z-index: 2000; /* Assicurati che sia sopra quasi tutto */
+    opacity: 0; /* Inizialmente invisibile */
+    visibility: hidden; /* Inizialmente nascosto al lettore di schermo e interazioni */
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out, visibility 0.4s ease-out; /* Animazione fluida */
+    max-width: 90%; /* Limita la larghezza su schermi piccoli */
+    display: flex; /* Per allineare icona e testo */
+    align-items: center;
+    gap: 10px; /* Spazio tra icona e testo */
+}
+
+/* Icona all'interno del toast */
+.toast-message .fas {
+    font-size: 1.4em; /* Rendi l'icona leggermente più grande */
+    color: var(--accent-color); /* Colore dell'icona (stesso del testo) */
+}
+
+/* Classe per mostrare il toast */
+.toast-message.show {
+    opacity: 1; /* Rendi visibile */
+    visibility: visible; /* Rendi visibile per il lettore di schermo */
+    transform: translateX(-50%) translateY(0); /* Sposta in posizione finale */
+}
+
+/* *** FINE MODIFICHE PER IL FEEDBACK E TOAST *** */
 
 
 /* ---------------------------------------------------------------------- */
