@@ -435,7 +435,7 @@ footer p {
     z-index: 1001; /* Il logo deve essere sopra tutto, anche il menu quando chiuso */
 }
 
-/* INIZIO MODIFICHE PER IL LOGO CLICCABILE */
+/* INIZIO MODIFICHE PER IL LOGO CLICCABILE (Correzione) */
 .navbar .logo a {
     color: var(--primary-color);
     text-decoration: none; /* Rimuove la sottolineatura di default */
@@ -445,9 +445,10 @@ footer p {
     border: 2px solid transparent; /* Bordo trasparente di default */
     border-radius: var(--border-radius); /* Angoli arrotondati */
     display: inline-block; /* Cruciale per padding, bordo e trasformazioni */
+    position: relative; /* Aggiunto per un controllo più preciso in futuro se necessario */
 }
 
-/* Stile per il TAP (mobile) e HOVER (desktop) */
+/* Stile per il TAP (mobile) e HOVER (desktop) - Rimosso 'outline: none' perché ora gestiamo il bordo */
 .navbar .logo a:hover,
 .navbar .logo a:active, /* Per il feedback al tap su mobile */
 .navbar .logo a:focus { /* Per accessibilità e navigazione da tastiera */
@@ -456,7 +457,8 @@ footer p {
     border-color: var(--secondary-color); /* Bordo magenta brillante */
     box-shadow: 0 0 20px var(--secondary-color), 0 0 40px rgba(255, 0, 255, 0.4); /* Ombra neon sul bordo */
     transform: scale(1.03); /* Leggero ingrandimento */
-    outline: none; /* Rimuovi l'outline di default per focus, se lo stile del border è sufficiente */
+    outline: 2px solid var(--accent-color); /* Fallback per focus, se il bordo non basta */
+    outline-offset: 2px; /* Sposta l'outline leggermente fuori */
 }
 
 /* Animazione "glitch" più sottile o opzionale, solo al hover su desktop */
@@ -752,13 +754,17 @@ footer p {
         flex-direction: column;
         width: 100%;
         position: fixed; /* CAMBIATO DA ABSOLUTE A FIXED */
-        top: 70px; /* Altezza della navbar, così appare sotto di essa */
+        /* OLD: top: 70px; */
+        /* OLD: top: 80px; */
+        top: 85px; /* MODIFICATO: Ulteriore aumento per allinearsi con la linea azzurra neon sotto il logo */
         left: 0;
         background-color: rgba(0, 0, 0, 0.98);
         padding: 20px 0;
         border-top: 1px solid var(--primary-color);
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
-        max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
+        /* OLD: max-height: calc(100vh - 70px); */
+        /* OLD: max-height: calc(100vh - 80px); */
+        max-height: calc(100vh - 85px); /* MODIFICATO: L'altezza prende il resto dello schermo, adattato al nuovo top */
         overflow-y: auto; /* Permette lo scroll interno se i link sono troppi */
         transform: translateY(-100%); /* Sposta in alto fuori dello schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
@@ -862,7 +868,8 @@ footer p {
     }
     .hero.hero-small .hero-content {
         /* Aumenta il padding-top per spingere giù il contenuto e lascia padding-bottom */
-        padding-top: 90px; /* Valore calibrato per assicurare visibilità su mobile */
+        /* OLD: padding-top: 90px; */
+        padding-top: 100px; /* Valore calibrato per assicurare visibilità su mobile */
         padding-bottom: 50px; /* Mantieniamo un buon padding dal basso */
     }
 
@@ -907,7 +914,8 @@ footer p {
     }
     .hero.hero-small .hero-content {
         /* Aumenta ulteriormente il padding-top per schermi molto piccoli */
-        padding-top: 75px; /* Valore calibrato per schermi molto piccoli */
+        /* OLD: padding-top: 75px; */
+        padding-top: 85px; /* Valore calibrato per schermi molto piccoli */
         padding-bottom: 40px; /* Mantieniamo il padding dal basso */
     }
     .hero h1 {
