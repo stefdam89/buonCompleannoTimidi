@@ -29,10 +29,10 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    /* TORNA ALLA CONFIGURAZIONE PRECEDENTE PER LO SFONDO */
+    /* RITORNO ALLA CONFIGURAZIONE ORIGINALE PER LO SFONDO */
     background: url('BG_festa_timidi.png') no-repeat center center;
     background-size: cover;
-    background-attachment: scroll; /* Sempre scroll, nessun fixed */
+    background-attachment: scroll; /* Rimosso 'fixed' ovunque */
     overflow-x: hidden;
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
 }
@@ -644,7 +644,7 @@ footer p {
         border-bottom: none;
     }
 
-    /* TORNA ALLA VERSIONE PRECEDENTE: RIMOSSA is-tapped */
+    /* QUESTA SEZIONE TORNA COME ERA PRIMA, NESSUNA is-tapped QUI */
     .nav-mobile-links a:hover,
     .nav-mobile-links a:focus {
         color: var(--accent-color); /* Cambia colore del testo a giallo fluo */
