@@ -29,9 +29,10 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    background: url('BG_festa_timidi.png') no-repeat center center; /* Rimosso 'fixed' qui */
+    /* TORNA ALLA CONFIGURAZIONE PRECEDENTE PER LO SFONDO */
+    background: url('BG_festa_timidi.png') no-repeat center center;
     background-size: cover;
-    background-attachment: scroll; /* Aggiunto questo per default */
+    background-attachment: scroll; /* Sempre scroll, nessun fixed */
     overflow-x: hidden;
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
 }
@@ -89,22 +90,6 @@ body.no-scroll {
     100% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); }
 }
 
-/* Le altre animazioni neonPulseSmall e neonPulseAccent sono rimosse o inutilizzate, ma le lascio commentate nel caso servano in futuro */
-/*
-@keyframes neonPulseSmall {
-    0% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
-    50% { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); }
-    100% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
-}
-
-@keyframes neonPulseAccent {
-    0% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
-    50% { text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.6); }
-    100% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
-}
-*/
-
-
 .hero h1 {
     font-family: var(--font-heading);
     font-size: 5em;
@@ -120,7 +105,6 @@ body.no-scroll {
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color); /* Statico */
     font-weight: 600;
-    /* Rimosso animation: neonPulseBig */
 }
 
 /* Countdown */
@@ -131,7 +115,6 @@ body.no-scroll {
     margin-bottom: 40px;
     text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color); /* Statico */
     font-weight: 700;
-    /* Rimosso animation: neonPulseAccent */
 }
 
 /* Bottoni */
@@ -179,7 +162,7 @@ body.no-scroll {
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
     scroll-margin-top: 100px;
-    z-index: 5; /* Assicurati che le sezioni non stiano sopra il menu */
+    z-index: 5; /* Assicurati che le sezioni non stiano sopra elementi importanti */
     position: relative; /* Necessario per z-index */
 }
 
@@ -191,7 +174,6 @@ body.no-scroll {
     position: relative;
     padding-bottom: 15px;
     text-shadow: 0 0 10px var(--heading-on-dark); /* Statico */
-    /* Rimosso animation: neonPulseBig */
 }
 
 .section h2::after {
@@ -257,7 +239,6 @@ body.no-scroll {
     box-shadow: none; /* Nessun cambio ombra */
 }
 
-
 /* Stile per le icone */
 .event-icon {
     font-size: 3.5em; /* Dimensione grande per l'icona */
@@ -265,7 +246,6 @@ body.no-scroll {
     text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); /* Statico */
     margin-bottom: 10px; /* Spazio sotto l'icona */
     display: block; /* Va a capo */
-    /* Rimosso animation: neonPulseAccent */
 }
 
 /* Stile per la parte "Quando:" e "Dove:" */
@@ -277,9 +257,7 @@ body.no-scroll {
     display: block; /* Va a capo */
     margin-bottom: 5px; /* Spazio sotto l'etichetta prima del valore */
     text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); /* Statico */
-    /* Rimosso animation: neonPulseSmall */
 }
-
 
 /* Stile per la parte "8-10 Agosto 2025" e "Rifugio Acampora..." */
 .event-value {
@@ -289,9 +267,7 @@ body.no-scroll {
     text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); /* Statico */
     font-weight: 600;
     display: block; /* Va a capo */
-    /* Rimosso animation: neonPulseAccent */
 }
-
 
 /* Griglie per Programma e Cosa Portare */
 .grid-2-cols {
@@ -352,7 +328,6 @@ body.no-scroll {
     border-bottom: 2px solid rgba(var(--primary-color), 0.3);
     padding-bottom: 10px;
     text-shadow: 0 0 8px var(--primary-color); /* Statico */
-    /* Rimosso animation: neonPulseSmall */
 }
 
 .program-item ul, .item-list ul {
@@ -394,7 +369,7 @@ footer {
     margin-top: 40px;
     box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
     scroll-margin-top: 100px;
-    z-index: 5; /* Assicurati che il footer non stia sopra il menu */
+    z-index: 5; /* Assicurati che il footer non stia sopra elementi importanti */
     position: relative; /* Necessario per z-index */
 }
 
@@ -417,7 +392,6 @@ footer p {
     padding-top: 120px; /* Valore aumentato per desktop/tablet per compensare la navbar */
     padding-bottom: 50px; /* Mantieniamo un buon padding dal basso */
 }
-
 
 /* ---------------------------------------------------------------------- */
 /* NAVBAR E HAMBURGER MENU - RIPRISTINATO IL COMPORTAMENTO SEPARATO */
@@ -453,7 +427,6 @@ footer p {
     text-decoration: none;
     text-shadow: 0 0 5px var(--primary-color); /* Statico */
     transition: text-shadow 0.3s ease;
-    /* Rimosso animation: neonPulseSmall */
 }
 
 .navbar .logo a:hover {
@@ -671,9 +644,9 @@ footer p {
         border-bottom: none;
     }
 
+    /* TORNA ALLA VERSIONE PRECEDENTE: RIMOSSA is-tapped */
     .nav-mobile-links a:hover,
-    .nav-mobile-links a:focus,
-    .nav-mobile-links a.is-tapped { /* <--- AGGIUNTA QUESTA RIGA */
+    .nav-mobile-links a:focus {
         color: var(--accent-color); /* Cambia colore del testo a giallo fluo */
         background-color: rgba(255, 0, 255, 0.1); /* Sfondo leggermente magenta trasparente */
         text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.4); /* Effetto neon al testo */
@@ -766,18 +739,6 @@ footer p {
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
     }
-    /* I seguenti sono stati spostati/modificati nelle sezioni sopra */
-    /*
-    .menu-section-title {
-        font-size: 1em;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    .menu-separator {
-        width: 50%;
-        margin: 15px auto;
-    }
-    */
 }
 
 @media (max-width: 600px) {
@@ -819,23 +780,5 @@ footer p {
     }
     .program-item h3, .item-list h3 {
         font-size: 1.6em;
-    }
-    /* I seguenti sono stati spostati/modificati nelle sezioni sopra */
-    /*
-    .menu-section-title {
-        font-size: 1em;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    .menu-separator {
-        width: 50%;
-        margin: 15px auto;
-    }
-    */
-}
-
-@media (min-width: 769px) {
-    body {
-        background-attachment: fixed; /* Applica 'fixed' solo per desktop/tablet */
     }
 }
