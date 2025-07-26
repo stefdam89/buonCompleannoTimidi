@@ -702,9 +702,11 @@ footer p {
     opacity: 0; /* Inizialmente invisibile */
     visibility: hidden; /* Inizialmente nascosto al lettore di schermo e interazioni */
     transition: transform 0.4s ease-out, opacity 0.4s ease-out, visibility 0.4s ease-out; /* Animazione fluida */
-    max-width: 90%; /* Limita la larghezza su schermi piccoli */
+    max-width: 700px; /* Aumentato da 90% a un valore fisso più ampio */
+    width: 90%; /* Assicura che su schermi piccoli occupi il 90% della larghezza */
     display: flex; /* Per allineare icona e testo */
-    align-items: center;
+    align-items: center; /* Centra verticalmente icona e testo */
+    justify-content: center; /* Centra orizzontalmente il contenuto all'interno del toast */
     gap: 10px; /* Spazio tra icona e testo */
 }
 
