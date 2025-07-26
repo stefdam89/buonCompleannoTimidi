@@ -24,18 +24,31 @@
     box-sizing: border-box;
 }
 
-/* Body - Sfondo fisso globale per l'effetto parallax */
+/* Body - Sfondo gestito da pseudo-elemento */
 body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    /* *** MODIFICA QUI: RIMOSSO 'fixed' e aggiunto background-attachment: scroll *** */
-    background: url('BG_festa_timidi.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll; /* Questa riga è CRUCIALE per il ripristino dell'immagine */
+    /* Rimosse le proprietà background dal body */
     overflow-x: hidden;
-    box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
+    position: relative; /* Necessario per posizionare ::before */
+    z-index: 1; /* Assicura che il contenuto del body sia sopra il ::before */
 }
+
+/* Pseudo-elemento per lo sfondo fisso */
+body::before {
+    content: '';
+    position: fixed; /* Questo lo rende fisso rispetto al viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('BG_festa_timidi.png') no-repeat center center;
+    background-size: cover; /* Copre l'intera area */
+    z-index: -1; /* Manda lo sfondo dietro a tutto il contenuto del body */
+    box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3); /* Manteniamo l'ombra */
+}
+
 
 /* Impedisce lo scroll del body quando il menu è aperto */
 body.no-scroll {
