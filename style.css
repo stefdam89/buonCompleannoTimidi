@@ -252,6 +252,19 @@ body.no-scroll {
     box-shadow: none; /* Nessun cambio ombra */
 }
 
+/* Stile di base per le liste, se necessario */
+.program-item, .item-list li {
+    transition: color 0.5s ease-out, text-shadow 0.5s ease-out; 
+    color: var(--default-text-color); 
+    text-shadow: none; 
+}
+
+/* Classe che si attiva quando l'elemento è visibile (aggiunta via JS) */
+.program-item.is-visible, .item-list li.is-visible {
+    color: var(--accent-color); 
+    text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(var(--accent-color-rgb), 0.5); 
+}
+
 
 /* Stile per le icone */
 .event-icon {

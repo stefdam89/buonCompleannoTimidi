@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGICA FEEDBACK FORM (SOLO SU feedback.html) ---
     const feedbackFormButton = document.getElementById('feedback-form-button'); // Il pulsante sulla pagina feedback.html
-    const feedbackToast = document.getElementById('feedback-toast');           // Il nuovo elemento toast
+    const feedbackToast = document.getElementById('feedback-toast');          // Il nuovo elemento toast
 
     // Verifichiamo se siamo sulla pagina feedback.html controllando l'esistenza degli elementi specifici
     if (feedbackFormButton && feedbackToast) {
@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- CODICE PER ANIMAZIONE SCROLL SECTION (Intersection Observer) (SOLO SU index.html) ---
-    const sections = document.querySelectorAll('.program-item, .item-list');
+    const sections = document.querySelectorAll('.program-item, .item-list'); 
     if (sections.length > 0) {
         const observerOptions = {
             root: null,
-            rootMargin: '0px',
+            rootMargin: '0px 0px -40% 0px', // MODIFICATO QUI: sposta il trigger più in alto
             threshold: 0.2
         };
 
@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
+                } else {
+                    // Opzionale: Se vuoi che l'effetto si spenga quando l'elemento esce dallo schermo
+                    // entry.target.classList.remove('in-view');
                 }
             });
         }, observerOptions);
