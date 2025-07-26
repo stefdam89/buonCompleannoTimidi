@@ -1,49 +1,52 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Gestione del Countdown
-    const countdownElement = document.getElementById('countdown');
-    // La data target è il 8 agosto 2025 alle 16:00:00
-    const targetDate = new Date('2025-08-08T16:00:00').getTime(); 
-
-    if (countdownElement) {
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                countdownElement.innerHTML = "LA FESTA È IN CORSO O È GIÀ STATA!";
-                clearInterval(countdownInterval);
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownElement.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
-        }
-
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
-    }
-
-    // Gestione del Menu Hamburger (RIPRISTINATO COMPORTAMENTO SEPARATO)
+document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
-    // Seleziona la lista di navigazione MOBILE (NON quella unificata)
-    const navMobileLinks = document.querySelector('.nav-mobile-links'); 
-    const body = document.body; // Per impedire lo scroll del body
+    const navMobileLinks = document.querySelector('.nav-mobile-links');
+    const body = document.body;
 
-    if (menuToggle && navMobileLinks) { // Controlla che entrambi gli elementi esistano
-        menuToggle.addEventListener('click', function() {
+    // Funzione per controllare se è un dispositivo mobile (larghezza inferiore a 900px)
+    const isMobileView = () => window.matchMedia('(max-width: 900px)').matches;
+
+    // Toggle del menu hamburger e gestione click sui link
+    if (menuToggle && navMobileLinks) {
+        // Event listener per il click sull'icona hamburger
+        menuToggle.addEventListener('click', () => {
             navMobileLinks.classList.toggle('is-open');
-            this.classList.toggle('is-active'); // Per animare l'hamburger a X
-            body.classList.toggle('no-scroll'); // Blocca lo scroll del body
+            menuToggle.classList.toggle('is-active');
+            body.classList.toggle('no-scroll');
         });
 
-        // Chiudi il menu quando un link viene cliccato (su mobile)
+        // Event listener per ogni link nel menu mobile
         navMobileLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMobileLinks.classList.contains('is-open')) {
+            link.addEventListener('click', (e) => {
+                if (isMobileView()) { // Se siamo in vista mobile
+                    e.preventDefault(); // Impedisce la navigazione immediata
+
+                    // Applica la classe per l'animazione persistente
+                    link.classList.add('is-tapped');
+
+                    // Chiude il menu mobile (per dare visibilità all'animazione del link)
+                    navMobileLinks.classList.remove('is-open');
+                    menuToggle.classList.remove('is-active');
+                    // Rimuovi no-scroll solo quando la navigazione sta per avvenire
+                    // body.classList.remove('no-scroll'); // COMMENTATO: Rimuoviamo il no-scroll dopo un micro-ritardo
+
+                    // Ritarda la navigazione e la rimozione della classe 'is-tapped'
+                    setTimeout(() => {
+                        link.classList.remove('is-tapped'); // Rimuovi l'effetto 'tapped'
+                        window.location.href = link.href; // Esegui la navigazione
+                        body.classList.remove('no-scroll'); // Rimuovi il no-scroll qui
+                    }, 300); // Durata dell'animazione persistente (0.3 secondi)
+
+                    // Opzionale: Se vuoi che il menu si chiuda con un leggero ritardo dopo il tap
+                    // Se lo vuoi subito, puoi rimuovere il setTimeout qui sotto
+                    // setTimeout(() => {
+                    //     navMobileLinks.classList.remove('is-open');
+                    //     menuToggle.classList.remove('is-active');
+                    //     body.classList.remove('no-scroll');
+                    // }, 500); // Chiude il menu un po' dopo l'inizio della navigazione
+                } else {
+                    // Per desktop, non ritardiamo la navigazione
+                    // Assicurati che il menu sia chiuso (nel caso strano sia aperto)
                     navMobileLinks.classList.remove('is-open');
                     menuToggle.classList.remove('is-active');
                     body.classList.remove('no-scroll');
@@ -52,31 +55,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Animazione all'ingresso per i box (program-item, item-list)
+    // --- CODICE PER ANIMAZIONE SCROLL SECTION (Intersection Observer) ---
+    // Se avevi già questo codice, assicurati che sia qui o che il tuo file JS lo mantenga.
+    // Questo è un esempio da uncommentare se lo hai rimosso.
+    const sections = document.querySelectorAll('.program-item, .item-list');
     const observerOptions = {
-        root: null, // Si riferisce alla viewport come root
-        rootMargin: '0px', // Nessun margine extra attorno alla root
-        threshold: 0.8 // L'elemento deve essere visibile per almeno l'80% per attivare l'osservatore
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // Percentuale di visibilità per attivare
     };
 
-    const observerCallback = (entries, observer) => {
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // L'elemento è entrato nella viewport
                 entry.target.classList.add('in-view');
-                // Disconnetti l'observer per questo elemento specifico dopo che è stato animato
-                // Questo fa sì che l'animazione avvenga solo una volta per elemento.
-                observer.unobserve(entry.target); 
-            } 
+                // Se vuoi che l'animazione avvenga una sola volta, decommenta la riga sotto
+                // observer.unobserve(entry.target);
+            } else {
+                // Se vuoi che l'animazione si ripeta quando la sezione esce ed entra dalla vista
+                // entry.target.classList.remove('in-view');
+            }
         });
-    };
+    }, observerOptions);
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Seleziona tutti i box che vuoi animare (sia program-item che item-list)
-    const animatedBoxes = document.querySelectorAll('.program-item, .item-list');
-
-    animatedBoxes.forEach(box => {
-        observer.observe(box);
+    sections.forEach(section => {
+        observer.observe(section);
     });
 });

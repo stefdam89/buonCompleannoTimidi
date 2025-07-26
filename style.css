@@ -672,7 +672,8 @@ footer p {
     }
 
     .nav-mobile-links a:hover,
-    .nav-mobile-links a:focus { /* Aggiungi :focus per accessibilità */
+    .nav-mobile-links a:focus,
+    .nav-mobile-links a.is-tapped { /* <--- AGGIUNTA QUESTA RIGA */
         color: var(--accent-color); /* Cambia colore del testo a giallo fluo */
         background-color: rgba(255, 0, 255, 0.1); /* Sfondo leggermente magenta trasparente */
         text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.4); /* Effetto neon al testo */
