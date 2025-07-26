@@ -432,7 +432,7 @@ body.no-scroll {
 }
 
 .program-item.lunch::before {
-    content: '\1F37D\FE0F '; /* 🍽️ Forchetta e coltello con piatto */
+    content: '🍝 '; /* 🍽️ Forchetta e coltello con piatto */
     text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
 }
 
@@ -442,7 +442,7 @@ body.no-scroll {
 }
 
 .program-item.dinner::before {
-    content: '\1F374 '; /* 🍴 Forchetta e coltello */
+    content: '🍽️ '; /* 🍴 Forchetta e coltello */
     text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(255, 255, 0, 0.3);
 }
 
@@ -461,7 +461,7 @@ body.no-scroll {
 }
 
 .item-list .icon-jacket::before {
-    content: '🥼'; /* 🧥 Cappotto */
+    content: '🕶️'; /* 🧥 Cappotto */
 }
 
 /* Per sopravvivere */
