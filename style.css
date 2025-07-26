@@ -29,10 +29,10 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
     color: var(--text-on-dark);
-    /* RITORNO ALLA CONFIGURAZIONE ORIGINALE PER LO SFONDO */
+    /* *** MODIFICA QUI: RIMOSSO 'fixed' e aggiunto background-attachment: scroll *** */
     background: url('BG_festa_timidi.png') no-repeat center center;
     background-size: cover;
-    background-attachment: scroll; /* Rimosso 'fixed' ovunque */
+    background-attachment: scroll; /* Questa riga è CRUCIALE per il ripristino dell'immagine */
     overflow-x: hidden;
     box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.3);
 }
@@ -90,6 +90,22 @@ body.no-scroll {
     100% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); }
 }
 
+/* Le altre animazioni neonPulseSmall e neonPulseAccent sono rimosse o inutilizzate, ma le lascio commentate nel caso servano in futuro */
+/*
+@keyframes neonPulseSmall {
+    0% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
+    50% { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); }
+    100% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
+}
+
+@keyframes neonPulseAccent {
+    0% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
+    50% { text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.6); }
+    100% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
+}
+*/
+
+
 .hero h1 {
     font-family: var(--font-heading);
     font-size: 5em;
@@ -105,6 +121,7 @@ body.no-scroll {
     color: var(--secondary-color);
     text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color); /* Statico */
     font-weight: 600;
+    /* Rimosso animation: neonPulseBig */
 }
 
 /* Countdown */
@@ -115,6 +132,7 @@ body.no-scroll {
     margin-bottom: 40px;
     text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color); /* Statico */
     font-weight: 700;
+    /* Rimosso animation: neonPulseAccent */
 }
 
 /* Bottoni */
@@ -162,7 +180,7 @@ body.no-scroll {
     border-top: 1px solid rgba(0, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 0, 255, 0.2);
     scroll-margin-top: 100px;
-    z-index: 5; /* Assicurati che le sezioni non stiano sopra elementi importanti */
+    z-index: 5; /* Assicurati che le sezioni non stiano sopra il menu */
     position: relative; /* Necessario per z-index */
 }
 
@@ -174,6 +192,7 @@ body.no-scroll {
     position: relative;
     padding-bottom: 15px;
     text-shadow: 0 0 10px var(--heading-on-dark); /* Statico */
+    /* Rimosso animation: neonPulseBig */
 }
 
 .section h2::after {
@@ -239,6 +258,7 @@ body.no-scroll {
     box-shadow: none; /* Nessun cambio ombra */
 }
 
+
 /* Stile per le icone */
 .event-icon {
     font-size: 3.5em; /* Dimensione grande per l'icona */
@@ -246,6 +266,7 @@ body.no-scroll {
     text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); /* Statico */
     margin-bottom: 10px; /* Spazio sotto l'icona */
     display: block; /* Va a capo */
+    /* Rimosso animation: neonPulseAccent */
 }
 
 /* Stile per la parte "Quando:" e "Dove:" */
@@ -257,7 +278,9 @@ body.no-scroll {
     display: block; /* Va a capo */
     margin-bottom: 5px; /* Spazio sotto l'etichetta prima del valore */
     text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); /* Statico */
+    /* Rimosso animation: neonPulseSmall */
 }
+
 
 /* Stile per la parte "8-10 Agosto 2025" e "Rifugio Acampora..." */
 .event-value {
@@ -267,7 +290,9 @@ body.no-scroll {
     text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); /* Statico */
     font-weight: 600;
     display: block; /* Va a capo */
+    /* Rimosso animation: neonPulseAccent */
 }
+
 
 /* Griglie per Programma e Cosa Portare */
 .grid-2-cols {
@@ -328,15 +353,12 @@ body.no-scroll {
     border-bottom: 2px solid rgba(var(--primary-color), 0.3);
     padding-bottom: 10px;
     text-shadow: 0 0 8px var(--primary-color); /* Statico */
+    /* Rimosso animation: neonPulseSmall */
 }
 
 .program-item ul, .item-list ul {
     list-style: none;
     padding-left: 0;
-}
-
-.section ul {
-    list-style: none; /* Rimuove i puntini predefiniti da tutte le liste UL all'interno delle sezioni */
 }
 
 .program-item ul li, .item-list ul li {
@@ -369,7 +391,7 @@ footer {
     margin-top: 40px;
     box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
     scroll-margin-top: 100px;
-    z-index: 5; /* Assicurati che il footer non stia sopra elementi importanti */
+    z-index: 5; /* Assicurati che il footer non stia sopra il menu */
     position: relative; /* Necessario per z-index */
 }
 
@@ -392,6 +414,7 @@ footer p {
     padding-top: 120px; /* Valore aumentato per desktop/tablet per compensare la navbar */
     padding-bottom: 50px; /* Mantieniamo un buon padding dal basso */
 }
+
 
 /* ---------------------------------------------------------------------- */
 /* NAVBAR E HAMBURGER MENU - RIPRISTINATO IL COMPORTAMENTO SEPARATO */
@@ -427,6 +450,7 @@ footer p {
     text-decoration: none;
     text-shadow: 0 0 5px var(--primary-color); /* Statico */
     transition: text-shadow 0.3s ease;
+    /* Rimosso animation: neonPulseSmall */
 }
 
 .navbar .logo a:hover {
