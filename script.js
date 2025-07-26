@@ -34,15 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const festaEndDate = new Date(2025, 7, 10, 23, 59, 59);
         const currentDate = new Date();
 
-        if (currentDate < festaEndDate) {
-            // Se la festa NON è ancora finita
-            feedbackFormButton.classList.add('disabled'); // Disabilita il pulsante via CSS
-            feedbackFormButton.removeAttribute('href');   // Rimuovi l'href per impedire la navigazione diretta
-            feedbackFormButton.style.cursor = 'not-allowed'; // Assicura che il cursore sia corretto
+        // Rimuovi la classe 'disabled' all'avvio se presente dall'HTML per errore o da un precedente test
+        feedbackFormButton.classList.remove('disabled');
+        feedbackFormButton.style.cursor = 'pointer'; // Assicurati che il cursore sia sempre pointer di default
 
-            // Aggiungiamo un event listener al pulsante disabilitato
-            feedbackFormButton.addEventListener('click', (e) => {
-                e.preventDefault(); // Impedisce qualsiasi azione predefinita sul click
+        // Aggiungiamo un event listener al pulsante per gestire il click
+        feedbackFormButton.addEventListener('click', (e) => {
+            if (currentDate < festaEndDate) {
+                // Se la festa NON è ancora finita (cioè la data attuale è PRIMA del 10 Agosto 2025)
+                e.preventDefault(); // Impedisce la navigazione al link!
 
                 // Mostra il messaggio toast
                 feedbackToast.classList.add('show');
@@ -51,14 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     feedbackToast.classList.remove('show');
                 }, 3000); // 3000 millisecondi = 3 secondi
-            });
 
-        } else {
-            // Se la festa è già finita
-            feedbackFormButton.classList.remove('disabled'); // Abilita il pulsante
-            feedbackFormButton.style.cursor = 'pointer'; // Ripristina il cursore normale
-            // Il toast non verrà mai mostrato in questo caso
-        }
+            } else {
+                // Se la festa è già finita (cioè la data attuale è DOPO o UGUALE al 10 Agosto 2025)
+                // Il default action (navigazione al link) avviene. Non dobbiamo fare nulla qui,
+                // perché non chiamiamo preventDefault().
+                // È anche una buona pratica assicurarsi che l'href sia impostato, anche se dovrebbe esserlo dall'HTML.
+                // feedbackFormButton.setAttribute('href', "https://docs.google.com/forms/d/e/1FAIpQLScbrzrMI2wyaM-qbWC9LSgURdGn1hh796EhvlVEGu72zTQenQ/viewform?usp=dialog");
+            }
+        });
     }
 
 
