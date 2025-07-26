@@ -81,20 +81,45 @@ body.no-scroll {
     padding: 20px;
 }
 
+/* ANIMAZIONI NEON PULSE - SOLO PER TITOLO PRINCIPALE DELL'HERO SECTION (H1) */
+@keyframes neonPulseBig {
+    0% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); }
+    50% { text-shadow: 0 0 12px var(--secondary-color), 0 0 25px var(--secondary-color), 0 0 50px var(--secondary-color); }
+    100% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); }
+}
+
+/* Le altre animazioni neonPulseSmall e neonPulseAccent sono rimosse o inutilizzate, ma le lascio commentate nel caso servano in futuro */
+/*
+@keyframes neonPulseSmall {
+    0% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
+    50% { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); }
+    100% { text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); }
+}
+
+@keyframes neonPulseAccent {
+    0% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
+    50% { text-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(255, 255, 0, 0.6); }
+    100% { text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); }
+}
+*/
+
+
 .hero h1 {
     font-family: var(--font-heading);
     font-size: 5em;
     margin-bottom: 30px;
     color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color); /* Statico */
+    animation: neonPulseBig 3s infinite alternate ease-in-out; /* Animazione SOLO qui */
 }
 
 .hero .subtitle {
     font-size: 2.5em;
-    margin-bottom: 30px; /* Margine di default per l'hero principale */
+    margin-bottom: 30px;
     color: var(--secondary-color);
-    text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color);
+    text-shadow: 0 0 8px var(--secondary-color), 0 0 15px var(--secondary-color); /* Statico */
     font-weight: 600;
+    /* Rimosso animation: neonPulseBig */
 }
 
 /* Countdown */
@@ -103,8 +128,9 @@ body.no-scroll {
     font-size: 3.5em;
     color: var(--accent-color);
     margin-bottom: 40px;
-    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color); /* Statico */
     font-weight: 700;
+    /* Rimosso animation: neonPulseAccent */
 }
 
 /* Bottoni */
@@ -163,7 +189,8 @@ body.no-scroll {
     color: var(--heading-on-dark);
     position: relative;
     padding-bottom: 15px;
-    text-shadow: 0 0 10px var(--heading-on-dark);
+    text-shadow: 0 0 10px var(--heading-on-dark); /* Statico */
+    /* Rimosso animation: neonPulseBig */
 }
 
 .section h2::after {
@@ -179,6 +206,7 @@ body.no-scroll {
     box-shadow: 0 0 15px var(--primary-color);
 }
 
+/* Paragrafi generici (non quelli di "Quando/Dove") */
 .section p {
     font-size: 1.2em;
     margin-bottom: 25px;
@@ -188,6 +216,82 @@ body.no-scroll {
     color: var(--text-on-dark);
 }
 
+/* ---------------------------------------------------------------------- */
+/* NUOVI STILI PER I DETTAGLI EVENTO (Quando, Dove) */
+/* ---------------------------------------------------------------------- */
+
+/* Wrapper per centrare il blocco completo dei dettagli "Quando/Dove" */
+.event-details-wrapper {
+    display: flex;
+    flex-direction: column; /* Impila verticalmente i detail-block sul wrapper */
+    align-items: center; /* Centra orizzontalmente i detail-block nel wrapper */
+    gap: 25px; /* Spazio TRA ogni blocco "Quando/Dove" */
+    margin-top: 30px;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenitore per ogni singola riga di dettaglio (Quando:, Dove:) - Rimosse box */
+.detail-block {
+    display: flex; /* Usa flexbox per allineare gli elementi al suo interno */
+    flex-direction: column; /* Impila icona, etichetta e valore */
+    justify-content: center; /* Centra orizzontalmente il contenuto nel blocco */
+    align-items: center; /* Centra gli elementi al suo interno */
+    padding: 0; /* Rimosso padding */
+    border: none; /* Rimosso bordo */
+    border-radius: 0; /* Rimosso border-radius */
+    box-shadow: none; /* Rimosso box-shadow */
+    transition: none; /* Rimosso transizione */
+    width: 100%; /* Occupare la larghezza disponibile nel wrapper */
+    max-width: 500px; /* Limita la larghezza massima del singolo blocco su desktop */
+    text-align: center;
+}
+
+/* Rimosso :hover per .detail-block in quanto la box è stata rimossa */
+.detail-block:hover {
+    transform: none; /* Nessun sollevamento */
+    border-color: none; /* Nessun cambio bordo */
+    box-shadow: none; /* Nessun cambio ombra */
+}
+
+
+/* Stile per le icone */
+.event-icon {
+    font-size: 3.5em; /* Dimensione grande per l'icona */
+    color: var(--secondary-color); /* Colore magenta per contrasto */
+    text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 0, 255, 0.4); /* Statico */
+    margin-bottom: 10px; /* Spazio sotto l'icona */
+    display: block; /* Va a capo */
+    /* Rimosso animation: neonPulseAccent */
+}
+
+/* Stile per la parte "Quando:" e "Dove:" */
+.event-label {
+    font-family: var(--font-heading);
+    font-size: 2.1em; /* Dimensione leggermente più grande */
+    color: var(--primary-color); /* Ciano brillante */
+    font-weight: 700; /* Molto in grassetto */
+    display: block; /* Va a capo */
+    margin-bottom: 5px; /* Spazio sotto l'etichetta prima del valore */
+    text-shadow: 0 0 8px var(--primary-color), 0 0 15px rgba(0, 255, 255, 0.3); /* Statico */
+    /* Rimosso animation: neonPulseSmall */
+}
+
+
+/* Stile per la parte "8-10 Agosto 2025" e "Rifugio Acampora..." */
+.event-value {
+    font-family: var(--font-body);
+    font-size: 1.6em; /* Rende il valore leggermente più piccolo dell'etichetta */
+    color: var(--accent-color); /* Giallo fluo per il valore */
+    text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(255, 255, 0, 0.4); /* Statico */
+    font-weight: 600;
+    display: block; /* Va a capo */
+    /* Rimosso animation: neonPulseAccent */
+}
+
+
 /* Griglie per Programma e Cosa Portare */
 .grid-2-cols {
     display: grid;
@@ -196,12 +300,8 @@ body.no-scroll {
     margin-top: 40px;
     text-align: left; /* Mantiene l'allineamento del testo all'interno delle colonne */
     max-width: 1000px;
-    margin-left: auto; /* NUOVO: Centra la griglia stessa */
-    margin-right: auto; /* NUOVO: Centra la griglia stessa */
-
-    /* NUOVO: Aggiunge la centratura del contenuto della griglia. */
-    /* Utile se hai meno colonne di quante ne permetterebbe la griglia,
-       ad esempio 2 colonne in uno spazio per 3, o 1 colonna per 2. */
+    margin-left: auto; /* Centra la griglia stessa */
+    margin-right: auto; /* Centra la griglia stessa */
     justify-content: center; /* Centra gli elementi della griglia nell'asse principale */
     align-items: flex-start; /* Allinea gli elementi in alto verticalmente */
 }
@@ -222,7 +322,6 @@ body.no-scroll {
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    /* Aggiunto background-color e border-color alla transizione per l'animazione allo scroll */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     color: var(--text-on-dark);
     border: 1px solid rgba(0, 255, 255, 0.2); /* Bordo azzurrino di default */
@@ -244,7 +343,6 @@ body.no-scroll {
     border-color: rgba(0, 255, 255, 0.6); /* Bordo azzurro più intenso */
 }
 
-
 .program-item h3, .item-list h3 {
     font-family: var(--font-heading);
     color: var(--primary-color);
@@ -252,12 +350,17 @@ body.no-scroll {
     font-size: 1.9em;
     border-bottom: 2px solid rgba(var(--primary-color), 0.3);
     padding-bottom: 10px;
-    text-shadow: 0 0 8px var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color); /* Statico */
+    /* Rimosso animation: neonPulseSmall */
 }
 
 .program-item ul, .item-list ul {
     list-style: none;
     padding-left: 0;
+}
+
+.section ul {
+    list-style: none; /* Rimuove i puntini predefiniti da tutte le liste UL all'interno delle sezioni */
 }
 
 .program-item ul li, .item-list ul li {
@@ -306,7 +409,7 @@ footer p {
 
 /* Regolazione del sottotitolo e padding per gli header di pagine interne (hero-small) */
 .hero.hero-small .subtitle {
-    margin-bottom: 50px; /* Mantieniamo un buon margine dal basso */
+    margin-bottom: 50px; /* Margine di default per l'hero principale */
 }
 .hero.hero-small .hero-content {
     /* Aumenta il padding-top per spingere giù il contenuto */
@@ -347,8 +450,9 @@ footer p {
 .navbar .logo a {
     color: var(--primary-color);
     text-decoration: none;
-    text-shadow: 0 0 5px var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color); /* Statico */
     transition: text-shadow 0.3s ease;
+    /* Rimosso animation: neonPulseSmall */
 }
 
 .navbar .logo a:hover {
@@ -526,7 +630,7 @@ footer p {
         box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
         max-height: calc(100vh - 70px); /* L'altezza prende il resto dello schermo */
         overflow-y: auto; /* Permette lo scroll interno se i link sono troppi */
-        transform: translateY(-100%); /* Sposta in alto fuori dallo schermo */
+        transform: translateY(-100%); /* Sposta in alto fuori dello schermo */
         transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
         opacity: 0 !important;
         visibility: hidden !important;
@@ -612,19 +716,27 @@ footer p {
     }
     .section h2 {
         font-size: 2.8em;
+        margin-bottom: 30px;
     }
-    .section p {
-        font-size: 1.1em;
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
     }
-    .grid-2-cols, .grid-3-cols {
-        grid-template-columns: 1fr;
-        max-width: none;
-        margin-left: 20px;
-        margin-right: 20px;
-        gap: 30px;
+    .btn-large {
+        font-size: 1.2em;
+        padding: 15px 30px;
     }
-    .program-item, .item-list {
-        padding: 25px;
+    .program-item h3, .item-list h3 {
+        font-size: 1.6em;
+    }
+    .menu-section-title {
+        font-size: 1em;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .menu-separator {
+        width: 50%;
+        margin: 15px auto;
     }
 }
 
@@ -641,7 +753,6 @@ footer p {
         padding-top: 75px; /* Valore calibrato per schermi molto piccoli */
         padding-bottom: 40px; /* Mantieniamo il padding dal basso */
     }
-
     .hero h1 {
         font-size: 1.8em;
     }
