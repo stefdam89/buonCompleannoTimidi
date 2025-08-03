@@ -760,37 +760,41 @@ footer p {
 
 /* *** INIZIO MODIFICHE PER IL FEEDBACK E TOAST *** */
 
-/* Rimuovi completamente o commenta il blocco .feedback-message - NON PIÙ USATO */
-/*
-.feedback-message {
-    background-color: rgba(255, 255, 0, 0.1);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 15px 25px;
-    border-radius: var(--border-radius);
-    margin-bottom: 25px;
-    font-size: 1.1em;
-    font-weight: 600;
-    text-shadow: 0 0 5px var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 1;
-    transition: opacity 0.3s ease;
+/* Stili per la galleria di immagini del percorso */
+.percorso-gallery {
+    display: grid; /* Usa CSS Grid per un layout flessibile */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2-3 colonne su desktop, 1 su mobile */
+    gap: 20px; /* Spazio tra le immagini */
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-*/
 
-/* La classe .hidden non è più necessaria per il messaggio di feedback se usi il toast - NON PIÙ USATA */
-/*
-.hidden {
-    display: none !important;
-    opacity: 0;
-    pointer-events: none;
+.percorso-item {
+    background-color: #f8f8f8; /* Un leggero sfondo */
+    border-radius: 8px; /* Bordi arrotondati */
+    overflow: hidden; /* Assicura che l'immagine non sporga */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Una leggera ombra */
+    text-align: center; /* Centra la didascalia */
+    display: flex; /* Usa flexbox per il contenuto dell'item */
+    flex-direction: column; /* Impila immagine e didascalia */
 }
-*/
+
+.percorso-item img {
+    width: 100%; /* Le immagini occupano tutta la larghezza del loro contenitore */
+    height: 200px; /* Altezza fissa per le immagini, puoi rimuoverla o aggiustarla */
+    object-fit: cover; /* Assicura che l'immagine copra l'area senza distorsioni */
+    border-bottom: 1px solid #eee; /* Linea sottile sotto l'immagine */
+}
+
+.percorso-item .image-caption {
+    padding: 15px; /* Spazio interno per la didascalia */
+    font-size: 0.9em;
+    color: #555;
+    flex-grow: 1; /* Permette alla didascalia di espandersi se necessario */
+    display: flex; /* Allinea verticalmente il testo se le didascalie sono di lunghezza diversa */
+    align-items: center; /* Centra verticalmente il testo */
+    justify-content: center; /* Centra orizzontalmente il testo */
+}
 
 /* Stile per il pulsante di feedback disabilitato - MANTIENI QUESTO, ma dovrebbe essere controllato da JS ora */
 .btn.disabled {
